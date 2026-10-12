@@ -29,3 +29,7 @@ next-env.d.ts
 
 # vercel
 .vercel
+
+# large raw reference scans (stay local, prevent >100MB HTTPS push timeouts)
+specs/frontend/*/*.jpg
+specs/frontend/*/*.jpeg
