@@ -1,0 +1,37 @@
+.form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.1rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(1.25rem, 3vw, 2rem);
+}
+.wide {
+  grid-column: 1 / -1;
+}
+.err {
+  color: #a3261b;
+  font-size: 0.9rem;
+}
+.banner {
+  grid-column: 1 / -1;
+  border-radius: 0.6rem;
+  padding: 0.85rem 1rem;
+  font-size: 0.95rem;
+}
+.ok {
+  background: rgba(184, 137, 59, 0.14);
+  border: 1px solid var(--gold);
+  color: var(--maroon-deep);
+}
+.bad {
+  background: #fae7e4;
+  border: 1px solid #a3261b;
+  color: #a3261b;
+}
+@media (max-width: 34rem) {
+  .form {
+    grid-template-columns: 1fr;
+  }
+}

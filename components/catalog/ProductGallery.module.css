@@ -1,0 +1,47 @@
+.wrap {
+  position: sticky;
+  top: calc(var(--header-h) + 1.5rem);
+  display: grid;
+  gap: 1rem;
+}
+.main {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: var(--sand);
+  box-shadow: var(--shadow-card);
+}
+.main :global(img) {
+  object-fit: cover;
+  object-position: top center;
+}
+.thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+.thumb {
+  position: relative;
+  width: 5rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 0.6rem;
+  border: 2px solid var(--line);
+  background: var(--sand);
+  cursor: pointer;
+  padding: 0;
+}
+.thumb :global(img) {
+  object-fit: cover;
+}
+.active {
+  border-color: var(--gold);
+}
+
+@media (max-width: 56rem) {
+  .wrap {
+    position: static;
+  }
+}

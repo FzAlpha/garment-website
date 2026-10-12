@@ -1,0 +1,81 @@
+.grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr));
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+  text-decoration: none;
+  color: var(--ink);
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card);
+}
+
+.media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  background: var(--sand);
+}
+.media :global(img) {
+  object-fit: cover;
+  transition: transform 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.card:hover .media :global(img) {
+  transform: scale(1.06);
+}
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(transparent 45%, rgba(28, 4, 8, 0.72));
+}
+
+.caption {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 1.5rem 1.4rem 1.3rem;
+  color: var(--ivory);
+  z-index: 1;
+}
+.kicker {
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-soft);
+}
+.title {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  margin: 0.3rem 0 0.7rem;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.badges span {
+  font-size: 0.78rem;
+  border: 1px solid rgba(227, 201, 143, 0.5);
+  border-radius: 999px;
+  padding: 0.25rem 0.7rem;
+  color: var(--ivory);
+}
+.cta {
+  margin-top: 0.9rem;
+  font-size: 0.9rem;
+  color: var(--gold-soft);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}

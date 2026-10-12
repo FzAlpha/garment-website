@@ -1,0 +1,87 @@
+.footer {
+  background: var(--maroon-deep);
+  color: rgba(251, 246, 236, 0.75);
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
+  font-size: 0.95rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 2rem 3rem;
+  align-items: start;
+}
+
+.brandCol {
+  max-width: 24rem;
+}
+.brandName {
+  font-family: var(--serif);
+  font-weight: 600;
+  font-size: 1.6rem;
+  color: var(--ivory);
+  margin-bottom: 0.3rem;
+}
+.brandSub {
+  color: var(--gold-soft);
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 0.9rem;
+}
+.blurb {
+  line-height: 1.6;
+}
+
+.colTitle {
+  font-family: var(--serif);
+  font-size: 1.15rem;
+  color: var(--ivory);
+  margin-bottom: 1rem;
+}
+
+.links {
+  display: grid;
+  gap: 0.55rem;
+}
+.links a,
+.contact a {
+  color: var(--gold-soft);
+  text-decoration: none;
+}
+.links a:hover,
+.contact a:hover {
+  text-decoration: underline;
+}
+
+.contact {
+  display: grid;
+  gap: 0.55rem;
+  line-height: 1.5;
+  font-style: normal;
+}
+
+.compliance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.2rem;
+}
+.compliance li {
+  border: 1px solid rgba(227, 201, 143, 0.4);
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.8rem;
+  color: var(--gold-soft);
+}
+
+.bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(227, 201, 143, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+}

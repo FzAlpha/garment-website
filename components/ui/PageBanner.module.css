@@ -1,0 +1,18 @@
+.banner {
+  background: var(--sand);
+  border-bottom: 1px solid var(--line);
+  padding-block: calc(var(--header-h) + 2.5rem) 2.5rem;
+}
+.inner {
+  display: grid;
+  gap: 0.9rem;
+  max-width: 48rem;
+}
+.title {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--maroon);
+}
+.subtitle {
+  color: var(--muted);
+  font-size: 1.1rem;
+}

@@ -1,0 +1,64 @@
+import type { Metadata, Viewport } from "next";
+import { Cormorant_Garamond, Jost } from "next/font/google";
+import { brand, colors } from "@/lib/tokens";
+import Header from "@/components/layout/Header";
+import Footer from "@/components/layout/Footer";
+import "./globals.css";
+
+const cormorant = Cormorant_Garamond({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
+  display: "swap",
+});
+
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-jost",
+  display: "swap",
+});
+
+export const metadata: Metadata = {
+  title: {
+    default: `${brand.name} — ${brand.tagline}`,
+    template: `%s · ${brand.name}`,
+  },
+  description: brand.description,
+  keywords: [
+    "garment manufacturing",
+    "uniform manufacturer India",
+    "security uniforms",
+    "corporate formal wear",
+    "bulk t-shirts",
+    "B2B apparel",
+    "contract manufacturing",
+  ],
+  icons: { icon: brand.logo },
+};
+
+export const viewport: Viewport = {
+  themeColor: colors.maroon,
+  width: "device-width",
+  initialScale: 1,
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
+      <body>
+        <a className="skip-link" href="#main">
+          Skip to content
+        </a>
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+      </body>
+    </html>
+  );
+}
