@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import styles from "./Hero.module.css";
 
 const stats = [
@@ -10,6 +11,17 @@ const stats = [
 export default function Hero() {
   return (
     <section className={styles.hero}>
+      <div className={styles.media} aria-hidden="true">
+        <Image
+          src="/images/hero-factory.jpg"
+          alt=""
+          fill
+          priority
+          sizes="(max-width: 60rem) 1px, 58vw"
+          className={styles.mediaImg}
+        />
+        <span className={styles.mediaVeil} />
+      </div>
       <div className={`container ${styles.inner}`}>
         <div className={styles.copy}>
           <span className={`eyebrow ${styles.eyebrow}`}>
