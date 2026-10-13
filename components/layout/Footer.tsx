@@ -8,7 +8,7 @@ export default function Footer() {
 
   return (
     <footer className={styles.footer}>
-      <div className="container">
+      <div className={styles.inner}>
         <div className={styles.grid}>
           <div className={styles.brandCol}>
             <div className={styles.brandName}>{company.name}</div>
@@ -62,12 +62,13 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className={styles.bottom}>
-          <span>
-            © {year} {company.legalName}. All rights reserved.
-          </span>
-          <span>Engineered in India · Trusted Worldwide</span>
-        </div>
+      </div>
+
+      <div className={styles.bottom}>
+        <span>
+          © {year} {company.legalName}. All rights reserved.
+        </span>
+        <span>Engineered in India · Trusted Worldwide</span>
       </div>
     </footer>
   );

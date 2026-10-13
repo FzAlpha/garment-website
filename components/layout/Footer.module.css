@@ -5,6 +5,13 @@
   font-size: 0.95rem;
 }
 
+/* Centered content width — full-bleed spread the four columns too thin, so the
+   columns and the bottom row share one comfortable width and stay aligned. */
+.inner {
+  width: min(72rem, 100% - 3rem);
+  margin-inline: auto;
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
@@ -75,9 +82,12 @@
   color: var(--gold-soft);
 }
 
+/* Full-bleed bottom bar — copyright and tagline run to the side gutters, while
+   the column block above stays centered. */
 .bottom {
   margin-top: 2.5rem;
   padding-top: 1.5rem;
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
   border-top: 1px solid rgba(227, 201, 143, 0.2);
   display: flex;
   flex-wrap: wrap;
