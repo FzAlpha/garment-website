@@ -19,7 +19,7 @@ export const colors = {
 
 export const fonts = {
   serif: '"Cormorant Garamond", Georgia, serif',
-  sans: '"Jost", system-ui, -apple-system, "Segoe UI", sans-serif',
+  sans: '"Lato", system-ui, -apple-system, "Segoe UI", sans-serif',
 } as const;
 
 export const brand = {

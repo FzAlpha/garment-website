@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Jost } from "next/font/google";
+import { Cormorant_Garamond, Lato } from "next/font/google";
 import { brand, colors } from "@/lib/tokens";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -18,10 +18,10 @@ const cormorant = Cormorant_Garamond({
   display: "swap",
 });
 
-const jost = Jost({
+const lato = Lato({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-jost",
+  weight: ["400", "700"],
+  variable: "--font-lato",
   display: "swap",
 });
 
@@ -57,7 +57,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${jost.variable}`}
+      className={`${cormorant.variable} ${lato.variable}`}
       suppressHydrationWarning
     >
       <body>
