@@ -24,7 +24,7 @@ export default function ManufacturingPage() {
       {/* Machinery gallery */}
       <section className="section">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <span className="eyebrow">Shop-Floor Equipment</span>
             <h2>Industrial Sewing &amp; Finishing Machinery</h2>
             <p className="section-intro">
@@ -33,7 +33,7 @@ export default function ManufacturingPage() {
               finishing stations.
             </p>
           </div>
-          <div className={styles.gallery}>
+          <div className={styles.gallery} data-reveal-group>
             {machines.map((m) => (
               <figure className={styles.tile} key={m.id}>
                 <Image
@@ -56,11 +56,11 @@ export default function ManufacturingPage() {
       {/* Factory workflow */}
       <section className="section section-tint">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <span className="eyebrow">How Orders Are Made</span>
             <h2>Six-Stage Production Workflow</h2>
           </div>
-          <div className={styles.workflow}>
+          <div className={styles.workflow} data-reveal-group>
             {factoryWorkflow.map((s) => (
               <article className={styles.step} key={s.step}>
                 <div className={styles.stepNum}>{String(s.step).padStart(2, "0")}</div>
@@ -75,11 +75,11 @@ export default function ManufacturingPage() {
       {/* Plant credentials */}
       <section className="section section-dark">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <span className="eyebrow">Plant Credentials</span>
             <h2>Capacity You Can Plan Around</h2>
           </div>
-          <div className={styles.metrics}>
+          <div className={styles.metrics} data-reveal-group>
             {plantMetrics.map((m) => (
               <div className={styles.metric} key={m.label}>
                 <div className={styles.metricValue}>{m.value}</div>

@@ -3,7 +3,12 @@ import { Cormorant_Garamond, Jost } from "next/font/google";
 import { brand, colors } from "@/lib/tokens";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
+import ScrollReveal from "@/components/util/ScrollReveal";
 import "./globals.css";
+
+// Add the reveal gate before first paint (skipped for reduced-motion) so
+// revealed content never flashes visible → hidden. Pairs with ScrollReveal.
+const revealGate = `(function(){try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches){document.documentElement.classList.add('reveal-ready')}}catch(e){}})()`;
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -52,12 +57,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
       <body>
+        <script dangerouslySetInnerHTML={{ __html: revealGate }} />
         <a className="skip-link" href="#main">
           Skip to content
         </a>
         <Header />
         <main id="main">{children}</main>
         <Footer />
+        <ScrollReveal />
       </body>
     </html>
   );

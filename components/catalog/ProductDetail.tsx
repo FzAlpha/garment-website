@@ -49,7 +49,7 @@ export default function ProductDetail({
         <Breadcrumbs items={crumbs} />
       </div>
       <div className="container" style={{ paddingBottom: "clamp(3.5rem, 8vw, 6rem)" }}>
-        <div className={styles.layout}>
+        <div className={styles.layout} data-reveal-group>
           <ProductGallery images={product.gallery} alt={product.title} />
 
           <div className={styles.info}>

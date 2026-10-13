@@ -21,7 +21,7 @@ export default function HomePage() {
 
       {/* Section 5 — Conversion CTA */}
       <section className="section section-dark">
-        <div className="container" style={{ textAlign: "center", maxWidth: "48rem", marginInline: "auto" }}>
+        <div className="container" data-reveal style={{ textAlign: "center", maxWidth: "48rem", marginInline: "auto" }}>
           <span className="eyebrow">Let&apos;s Build Your Order</span>
           <h2>
             Ready to discuss your bulk garment or customized uniform

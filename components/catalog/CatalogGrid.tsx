@@ -78,7 +78,7 @@ export default function CatalogGrid({
       </div>
 
       {visible.length > 0 ? (
-        <div className={styles.grid}>
+        <div className={styles.grid} data-reveal-group>
           {visible.map((p) => (
             <ProductCard key={p.slug} product={p} />
           ))}

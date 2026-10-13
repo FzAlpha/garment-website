@@ -9,7 +9,7 @@ export default function MachineryShowcase() {
   return (
     <section className="section section-dark" id="machinery">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <span className="eyebrow">Direct From the Factory Floor</span>
           <h2>Industrial Production Capacity &amp; Advanced Machinery</h2>
           <p className="section-intro">
@@ -19,7 +19,7 @@ export default function MachineryShowcase() {
           </p>
         </div>
 
-        <div className={styles.grid}>
+        <div className={styles.grid} data-reveal-group>
           {machines.map((m) => (
             <figure className={styles.tile} key={m.id}>
               <Image
@@ -36,7 +36,7 @@ export default function MachineryShowcase() {
           ))}
         </div>
 
-        <div className={styles.metrics}>
+        <div className={styles.metrics} data-reveal-group>
           {plantMetrics.map((m) => (
             <div className={styles.metric} key={m.label}>
               <div className={styles.metricValue}>{m.value}</div>
@@ -45,7 +45,7 @@ export default function MachineryShowcase() {
           ))}
         </div>
 
-        <Link href="/manufacturing" className="btn btn-gold">
+        <Link href="/manufacturing" className="btn btn-gold" data-reveal>
           View Full Factory Infrastructure
         </Link>
       </div>

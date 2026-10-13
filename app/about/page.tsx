@@ -34,7 +34,7 @@ export default function AboutPage() {
       />
 
       <section className="section">
-        <div className="container" style={{ display: "grid", gap: "1.5rem", maxWidth: "48rem" }}>
+        <div className="container" data-reveal style={{ display: "grid", gap: "1.5rem", maxWidth: "48rem" }}>
           <span className="eyebrow">Mission &amp; Vision</span>
           <h2>Dependable apparel, built to specification and delivered on time.</h2>
           <p className="section-intro">
@@ -53,11 +53,11 @@ export default function AboutPage() {
 
       <section className="section section-tint">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <span className="eyebrow">What Sets Us Apart</span>
             <h2>Capability Across the Full Production Cycle</h2>
           </div>
-          <div className="grid-auto">
+          <div className="grid-auto" data-reveal-group>
             {pillars.map((p) => (
               <article
                 key={p.title}
@@ -80,7 +80,7 @@ export default function AboutPage() {
       </section>
 
       <section className="section section-dark">
-        <div className="container" style={{ textAlign: "center", maxWidth: "46rem", marginInline: "auto" }}>
+        <div className="container" data-reveal style={{ textAlign: "center", maxWidth: "46rem", marginInline: "auto" }}>
           <h2>Let&apos;s manufacture your next order together.</h2>
           <p className="section-intro" style={{ marginInline: "auto" }}>
             Share your requirements and we&apos;ll respond with a tailored

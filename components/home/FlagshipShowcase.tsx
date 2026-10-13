@@ -14,7 +14,7 @@ export default function FlagshipShowcase() {
   return (
     <section className="section" id="collections">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <span className="eyebrow">Flagship Collections</span>
           <h2>Three Specialised Manufacturing Lines</h2>
           <p className="section-intro">
@@ -24,7 +24,7 @@ export default function FlagshipShowcase() {
           </p>
         </div>
 
-        <div className={styles.grid}>
+        <div className={styles.grid} data-reveal-group>
           {categories.map((c) => {
             const meta = categoryMeta[c.slug];
             return (

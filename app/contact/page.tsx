@@ -26,7 +26,7 @@ export default function ContactPage() {
       />
 
       <section className="section">
-        <div className="container two-col">
+        <div className="container two-col" data-reveal-group>
           <div style={{ display: "grid", gap: "1.5rem" }}>
             <div>
               <span className="eyebrow">Direct Channels</span>

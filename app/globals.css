@@ -362,6 +362,40 @@ textarea:focus {
   }
 }
 
+/* ── Scroll reveal ───────────────────────────────────────────────────────────
+   Progressive enhancement: the `reveal-ready` gate is added pre-paint by the
+   layout's inline script and by ScrollReveal.tsx. Uses animation (not
+   transition) so element hover transitions stay untouched after revealing. */
+
+.reveal-ready [data-reveal],
+.reveal-ready [data-reveal-group] > * {
+  opacity: 0;
+}
+.reveal-ready [data-reveal].is-visible,
+.reveal-ready [data-reveal-group] > .is-visible {
+  opacity: 1;
+  animation: reveal-in 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) backwards;
+}
+
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(1.75rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-ready [data-reveal],
+  .reveal-ready [data-reveal-group] > * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+}
+
 /* ── Reduced motion ──────────────────────────────────────────────────────── */
 
 @media (prefers-reduced-motion: reduce) {

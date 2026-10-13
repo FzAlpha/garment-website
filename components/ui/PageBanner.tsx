@@ -15,7 +15,7 @@ export default function PageBanner({
   return (
     <section className={styles.banner}>
       <div className="container">
-        <div className={styles.inner}>
+        <div className={styles.inner} data-reveal-group>
           {crumbs && <Breadcrumbs items={crumbs} />}
           {eyebrow && <span className="eyebrow">{eyebrow}</span>}
           <h1 className={styles.title}>{title}</h1>

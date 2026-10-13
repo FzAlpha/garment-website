@@ -25,14 +25,14 @@ export default function ProductsPage() {
 
       <section className="section section-tint">
         <div className="container">
-          <div className="section-head">
+          <div className="section-head" data-reveal>
             <span className="eyebrow">Signature Styles</span>
             <h2>Featured Products</h2>
             <p className="section-intro">
               A selection of our most-requested models across all three lines.
             </p>
           </div>
-          <div className="grid-auto">
+          <div className="grid-auto" data-reveal-group>
             {featured.map((p) => (
               <ProductCard key={p.slug} product={p} />
             ))}

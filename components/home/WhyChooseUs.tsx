@@ -35,7 +35,7 @@ export default function WhyChooseUs() {
   return (
     <section className="section section-tint" id="why">
       <div className="container">
-        <div className="section-head">
+        <div className="section-head" data-reveal>
           <span className="eyebrow">Why Prolink</span>
           <h2>Built for Institutions &amp; Brands at Scale</h2>
           <p className="section-intro">
@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
           </p>
         </div>
 
-        <div className={styles.grid}>
+        <div className={styles.grid} data-reveal-group>
           {values.map((v) => (
             <article className={styles.card} key={v.title}>
               <div className={styles.icon}>{v.icon}</div>
