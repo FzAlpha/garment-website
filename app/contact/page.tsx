@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import PageBanner from "@/components/ui/PageBanner";
 import ContactForm from "@/components/contact/ContactForm";
-import { company, mailtoLink, telLink, whatsappLink } from "@/lib/company";
+import { company, mailtoLink, telLink, telLinkAlt, whatsappLink } from "@/lib/company";
 
 export const metadata: Metadata = {
   title: "Contact Us",
@@ -11,7 +11,14 @@ export const metadata: Metadata = {
 
 const channels = [
   { label: "Phone", value: company.phone, href: telLink },
+  { label: "Alternate Phone", value: company.phoneAlt, href: telLinkAlt },
   { label: "Email", value: company.email, href: mailtoLink },
+  {
+    label: "Website",
+    value: company.website.replace(/^https?:\/\//, ""),
+    href: company.website,
+    external: true,
+  },
   { label: "WhatsApp", value: "Chat with our team", href: whatsappLink, external: true },
 ];
 

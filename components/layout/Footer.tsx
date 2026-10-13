@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { company, mailtoLink, telLink, whatsappLink } from "@/lib/company";
+import { company, mailtoLink, telLink, telLinkAlt, whatsappLink } from "@/lib/company";
 import { categories } from "@/lib/navigation";
 import styles from "./Footer.module.css";
 
@@ -53,7 +53,11 @@ export default function Footer() {
               <span>{company.address.line2}</span>
               <span>{company.address.country}</span>
               <a href={telLink}>{company.phone}</a>
+              <a href={telLinkAlt}>{company.phoneAlt}</a>
               <a href={mailtoLink}>{company.email}</a>
+              <a href={company.website} target="_blank" rel="noopener noreferrer">
+                {company.website.replace(/^https?:\/\//, "")}
+              </a>
               <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
                 WhatsApp Enquiry
               </a>
