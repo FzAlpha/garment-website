@@ -23,6 +23,9 @@
   justify-content: space-between;
   gap: 1rem;
   min-height: var(--header-h);
+  /* Full-bleed: logo to the left gutter, nav to the right gutter. */
+  width: 100%;
+  padding-inline: clamp(1.25rem, 4vw, 3.5rem);
 }
 
 .brand {
