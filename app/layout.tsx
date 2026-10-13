@@ -55,7 +55,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${cormorant.variable} ${jost.variable}`}>
+    <html
+      lang="en"
+      className={`${cormorant.variable} ${jost.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <script dangerouslySetInnerHTML={{ __html: revealGate }} />
         <a className="skip-link" href="#main">
