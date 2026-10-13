@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     "B2B apparel",
     "contract manufacturing",
   ],
-  icons: { icon: brand.logo },
+  icons: { icon: brand.mark },
 };
 
 export const viewport: Viewport = {

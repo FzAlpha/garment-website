@@ -32,13 +32,25 @@
   text-decoration: none;
   color: inherit;
 }
+/* Rounded badge holding the transparent icon mark — reads on both the
+   transparent-maroon (home top) and solid-ivory header states. */
 .logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0.3rem;
+  border-radius: 0.6rem;
+  background: var(--ivory);
+  border: 1px solid rgba(184, 137, 59, 0.55);
+  box-shadow: 0 2px 8px -4px rgba(58, 8, 18, 0.45);
+}
+.logoImg {
   display: block;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 0.5rem;
-  object-fit: cover;
-  border: 1px solid rgba(227, 201, 143, 0.5);
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .brandText {
   display: flex;

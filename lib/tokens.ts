@@ -27,7 +27,10 @@ export const brand = {
   tagline: "Garment Manufacturing & Uniform Solutions",
   description:
     "Premier garment manufacturing and customized uniform solutions — engineered in India, trusted worldwide.",
+  // Full horizontal lockup (icon + wordmark on white) — for light surfaces / emails.
   logo: "/images/logo.jpg",
+  // Isolated icon mark, transparent background — for the header badge and favicon.
+  mark: "/images/logo-mark.png",
 } as const;
 
 export type BrandColors = typeof colors;

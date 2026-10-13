@@ -34,14 +34,16 @@ export default function Header() {
     <header className={`${styles.header} ${solid ? styles.solid : ""}`}>
       <div className={`container ${styles.inner}`}>
         <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
-          <Image
-            src={brand.logo}
-            alt=""
-            width={40}
-            height={40}
-            className={styles.logo}
-            priority
-          />
+          <span className={styles.logo}>
+            <Image
+              src={brand.mark}
+              alt=""
+              width={40}
+              height={40}
+              className={styles.logoImg}
+              priority
+            />
+          </span>
           <span className={styles.brandText}>
             <span className={styles.brandName}>{brand.name}</span>
             <span className={styles.brandSub}>Garment Manufacturing</span>
