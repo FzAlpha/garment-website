@@ -6,7 +6,7 @@ import WhyChooseUs from "@/components/home/WhyChooseUs";
 
 export default function HomePage() {
   return (
-    <>
+    <div className="home">
       {/* Section 1 — Hero */}
       <Hero />
 
@@ -20,7 +20,7 @@ export default function HomePage() {
       <WhyChooseUs />
 
       {/* Section 5 — Conversion CTA */}
-      <section className="section section-dark">
+      <section className="section section-dark" id="cta">
         <div className="container" data-reveal style={{ textAlign: "center", maxWidth: "48rem", marginInline: "auto" }}>
           <span className="eyebrow">Let&apos;s Build Your Order</span>
           <h2>
@@ -38,6 +38,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-    </>
+    </div>
   );
 }
