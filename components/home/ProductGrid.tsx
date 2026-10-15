@@ -32,14 +32,14 @@ export default function ProductGrid() {
   return (
     <section className={styles.wrap}>
       <div className={styles.inner}>
-        <div className={styles.grid} data-reveal-group>
+        <div className={styles.grid}>
           {row1.map((i) => (
-            <Link key={i} href="/products" className={styles.product}>
+            <Link key={i} href="/products" className={styles.product} data-anim="rise">
               <Label />
             </Link>
           ))}
           {row2.map((i) => (
-            <Link key={i} href="/products" className={styles.product}>
+            <Link key={i} href="/products" className={styles.product} data-anim="rise">
               <span className={styles.tag}>
                 <span className={styles.pill}>Winter</span>
                 <Heart />
@@ -49,7 +49,7 @@ export default function ProductGrid() {
           ))}
         </div>
 
-        <div className={styles.seeAll} data-reveal>
+        <div className={styles.seeAll} data-anim="fade">
           <Link href="/products" className="btn">
             See All Brands
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">

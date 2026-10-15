@@ -22,13 +22,13 @@ export default function Header() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close the mobile menu whenever the route changes.
   useEffect(() => {
     setOpen(false);
   }, [pathname]);
 
-  // Header is transparent only at the top of the homepage; solid everywhere else.
-  const solid = !isHome || scrolled;
+  // The homepage carries its own nav inside the hero panel (it scrolls away,
+  // matching the reference). The global header is only for inner pages.
+  if (isHome) return null;
 
   const isActive = (item: NavItem) =>
     pathname === item.href ||
@@ -90,95 +90,48 @@ export default function Header() {
       </Link>
     );
 
-  const wordmark = (
-    <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
-      <span className={styles.logo}>
-        <Image
-          src={brand.mark}
-          alt=""
-          width={40}
-          height={40}
-          className={styles.logoImg}
-          priority
-        />
-      </span>
-      <span className={styles.brandText}>
-        <span className={styles.brandName}>{brand.name}</span>
-        <span className={styles.brandSub}>Garment Manufacturing</span>
-      </span>
-    </Link>
-  );
-
-  const toggle = (
-    <button
-      type="button"
-      className={styles.toggle}
-      aria-expanded={open}
-      aria-controls="primary-nav"
-      aria-label="Toggle navigation menu"
-      onClick={() => setOpen((v) => !v)}
-    >
-      <span className={styles.bar} />
-    </button>
-  );
-
-  // Split the nav around the centred wordmark for the homepage (VEXO layout).
-  const mid = Math.ceil(primaryNav.length / 2);
-  const leftItems = primaryNav.slice(0, mid);
-  const rightItems = primaryNav.slice(mid);
-
   return (
-    <header
-      className={`${styles.header} ${solid ? styles.solid : ""} ${
-        isHome ? styles.homeHeader : ""
-      }`}
-    >
-      {isHome ? (
-        <div className={`${styles.inner} ${styles.centered}`}>
-          <nav className={`${styles.side} ${styles.sideLeft}`} aria-label="Primary">
-            {leftItems.map(renderItem)}
-          </nav>
+    <header className={`${styles.header} ${scrolled ? styles.solid : ""} ${styles.solid}`}>
+      <div className={styles.inner}>
+        <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
+          <span className={styles.logo}>
+            <Image
+              src={brand.mark}
+              alt=""
+              width={40}
+              height={40}
+              className={styles.logoImg}
+              priority
+            />
+          </span>
+          <span className={styles.brandText}>
+            <span className={styles.brandName}>{brand.name}</span>
+            <span className={styles.brandSub}>Garment Manufacturing</span>
+          </span>
+        </Link>
 
-          <Link href="/" className={styles.wordmark} aria-label={`${brand.name} home`}>
-            {brand.name}
+        <button
+          type="button"
+          className={styles.toggle}
+          aria-expanded={open}
+          aria-controls="primary-nav"
+          aria-label="Toggle navigation menu"
+          onClick={() => setOpen((v) => !v)}
+        >
+          <span className={styles.bar} />
+        </button>
+
+        <nav
+          id="primary-nav"
+          className={`${styles.nav} ${open ? styles.navOpen : ""}`}
+          aria-label="Primary"
+        >
+          {primaryNav.map(renderItem)}
+          <Link href="/quote" className={`btn ${styles.cta}`}>
+            Request a Quote
           </Link>
-
-          <div className={`${styles.side} ${styles.sideRight}`}>
-            {rightItems.map(renderItem)}
-            <Link href="/quote" className={`btn ${styles.cta}`}>
-              Request a Quote
-            </Link>
-          </div>
-
-          {toggle}
-
-          <nav
-            id="primary-nav"
-            className={`${styles.mobileNav} ${open ? styles.navOpen : ""}`}
-            aria-label="Primary"
-          >
-            {primaryNav.map(renderItem)}
-            <Link href="/quote" className={`btn ${styles.cta}`}>
-              Request a Quote
-            </Link>
-          </nav>
-        </div>
-      ) : (
-        <div className={styles.inner}>
-          {wordmark}
-          {toggle}
-          <nav
-            id="primary-nav"
-            className={`${styles.nav} ${open ? styles.navOpen : ""}`}
-            aria-label="Primary"
-          >
-            {primaryNav.map(renderItem)}
-            <Link href="/quote" className={`btn ${styles.cta}`}>
-              Request a Quote
-            </Link>
-          </nav>
-        </div>
-      )}
+        </nav>
+      </div>
     </header>
   );
 }

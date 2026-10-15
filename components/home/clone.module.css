@@ -2,9 +2,13 @@
    Greyscale gradient "photo" placeholders stand in for the reference's
    fashion photography (only one real photo is available). */
 
+/* Each section is a floating rounded panel on the blue-grey canvas. */
 .wrap {
   position: relative;
   overflow: hidden;
+  margin: clamp(0.75rem, 2vw, 1.25rem);
+  border-radius: clamp(1.5rem, 3vw, 2.5rem);
+  background: linear-gradient(172deg, var(--panel-a) 0%, #dbe4e5 60%, #d0dbdd 100%);
   padding-block: clamp(3rem, 7vw, 5.5rem);
 }
 .inner {
@@ -19,7 +23,9 @@
   position: absolute;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  /* `translate` (not `transform`) centres it, so the drift animation can use
+     `transform: translateX()` without losing the centring. */
+  translate: -50% -50%;
   z-index: 0;
   white-space: nowrap;
   font-family: var(--display);
