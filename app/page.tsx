@@ -36,8 +36,22 @@ export default function HomePage() {
       <WhyChooseUs />
 
       {/* Section 9 — Conversion CTA */}
-      <section className="section section-dark" id="cta">
-        <div className="container" data-reveal style={{ textAlign: "center", maxWidth: "48rem", marginInline: "auto" }}>
+      <section className="section section-dark" id="cta" style={{ position: "relative", overflow: "hidden" }}>
+        <span
+          className="ghost-word"
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            left: "50%",
+            top: "50%",
+            transform: "translate(-50%, -50%)",
+            fontSize: "clamp(4rem, 18vw, 15rem)",
+            whiteSpace: "nowrap",
+          }}
+        >
+          Let&apos;s Build
+        </span>
+        <div className="container" data-reveal style={{ position: "relative", zIndex: 1, textAlign: "center", maxWidth: "48rem", marginInline: "auto" }}>
           <span className="eyebrow">Let&apos;s Build Your Order</span>
           <h2>
             Ready to discuss your bulk garment or customized uniform

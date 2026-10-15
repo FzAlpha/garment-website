@@ -146,6 +146,42 @@
   grid-template-columns: repeat(2, minmax(13rem, 1fr));
   min-width: 30rem;
 }
+
+/* Unified "What We Make" grouped mega-menu: columns with headings.
+   Anchored to the trigger's right edge so a wide panel never overflows. */
+.mega {
+  left: auto;
+  right: 0;
+  transform: translateY(0.4rem);
+  grid-template-columns: repeat(3, minmax(11rem, 1fr));
+  min-width: 40rem;
+  gap: 0.15rem 1.25rem;
+  padding: 1.1rem 1.25rem;
+  align-items: start;
+}
+.hasMenu:hover .mega,
+.hasMenu:focus-within .mega {
+  transform: translateY(0);
+}
+.megaCol {
+  display: grid;
+  gap: 0.1rem;
+  align-content: start;
+}
+.megaHead {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--maroon);
+  text-decoration: none;
+  padding: 0.3rem 0.8rem 0.5rem;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid var(--line);
+}
+.megaHead:hover {
+  color: var(--gold);
+}
 .menuLink {
   display: block;
   padding: 0.6rem 0.8rem;
@@ -184,6 +220,37 @@
   background: var(--maroon-deep);
   border-color: var(--maroon-deep);
   color: var(--ivory);
+}
+
+/* Homepage (VEXO monochrome canvas): dark neutral text + black pill CTA,
+   even in the transparent top state. Keeps the maroon/gold off the home page. */
+.homeHeader:not(.solid) {
+  color: #16181a;
+}
+.homeHeader:not(.solid) .brandName,
+.homeHeader.solid .brandName {
+  color: #16181a;
+}
+.homeHeader .brandSub {
+  color: #6b7174;
+}
+.homeHeader.solid {
+  background: rgba(238, 241, 241, 0.92);
+}
+.homeHeader .link::after {
+  background: #16181a;
+}
+.homeHeader .cta,
+.homeHeader.solid .cta {
+  background: #16181a;
+  border-color: #16181a;
+  color: #fff;
+}
+.homeHeader .cta:hover,
+.homeHeader.solid .cta:hover {
+  background: #000;
+  border-color: #000;
+  color: #fff;
 }
 
 .toggle {
@@ -276,6 +343,21 @@
   .menuWide {
     grid-template-columns: 1fr;
     min-width: 0;
+  }
+  .mega {
+    grid-template-columns: 1fr;
+    min-width: 0;
+    left: auto;
+    right: auto;
+    transform: none;
+    gap: 0;
+    padding: 0.25rem 0 0.5rem 0.75rem;
+  }
+  .megaCol {
+    margin-top: 0.4rem;
+  }
+  .megaHead {
+    padding-left: 0;
   }
   .cta,
   .solid .cta {

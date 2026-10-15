@@ -2,61 +2,65 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./Hero.module.css";
 
-const stats = [
-  { num: "50,000+", label: "Pieces / Month" },
-  { num: "AQL 2.5", label: "Quality Standard" },
-  { num: "Global", label: "Export Reach" },
-];
-
 export default function Hero() {
   return (
     <section className={styles.hero}>
-      <div className={styles.media} aria-hidden="true">
-        <Image
-          src="/images/hero-factory.jpg"
-          alt=""
-          fill
-          priority
-          sizes="(max-width: 60rem) 1px, 58vw"
-          className={styles.mediaImg}
-        />
-        <span className={styles.mediaVeil} />
-      </div>
-      <div className={`container ${styles.inner}`}>
-        <div className={styles.copy}>
-          <span className={`eyebrow ${styles.eyebrow}`}>
+      <div className={styles.panel}>
+        <span className={styles.rays} aria-hidden="true" />
+
+        <div className={styles.top}>
+          <span className={styles.eyebrow}>
             Customized Uniforms &amp; Garment Manufacturing
           </span>
-          <h1>
-            India-Based Garment Manufacturing.{" "}
-            <em>Global Supply Capability.</em>
+          <h1 className={styles.title}>
+            Uniforms For Every
+            <br />
+            Sector, Every <em>Shift</em>
           </h1>
-          <p className={styles.lead}>
-            Prolink manufactures customized uniforms and garments for
-            institutions, companies and organizations — designed to your
-            requirements and supplied across India and international markets.
-          </p>
           <div className={styles.actions}>
-            <Link href="/uniforms" className="btn btn-gold">
-              Explore Uniform Solutions
-            </Link>
-            <Link href="/quote" className="btn btn-ghost-light">
+            <Link href="/quote" className="btn">
               Request a Quote
             </Link>
+            <Link href="/uniforms" className="btn btn-gold">
+              Explore Solutions
+            </Link>
+          </div>
+        </div>
+
+        <div className={styles.bottom}>
+          <div className={styles.intro}>
+            <div className={styles.dots} aria-hidden="true">
+              <span />
+              <span />
+              <span />
+            </div>
+            <p>
+              Made in India and supplied worldwide — customized uniforms and
+              garments for institutions, companies and organizations.
+            </p>
           </div>
 
-          <dl className={styles.stats}>
-            {stats.map((s) => (
-              <div className={styles.stat} key={s.label}>
-                <dt className={styles.statNum}>{s.num}</dt>
-                <dd className={styles.statLabel}>{s.label}</dd>
-              </div>
-            ))}
-          </dl>
+          <Link
+            href="/manufacturing"
+            className={styles.videoCard}
+            aria-label="See how we manufacture"
+          >
+            <Image
+              src="/images/hero-factory.jpg"
+              alt=""
+              fill
+              priority
+              sizes="(max-width: 48rem) 60vw, 22rem"
+              className={styles.videoImg}
+            />
+            <span className={styles.play} aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </span>
+            <span className={styles.videoLabel}>Inside Our Plant</span>
+          </Link>
         </div>
-      </div>
-      <div className={styles.scrollCue} aria-hidden="true">
-        <span />
       </div>
     </section>
   );

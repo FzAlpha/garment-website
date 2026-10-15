@@ -5,6 +5,33 @@
   font-size: 0.95rem;
 }
 
+/* Monochrome variant — used only on the VEXO-styled homepage. Remaps the
+   maroon/gold tokens this module reads to a black-and-grey scheme. */
+.footer.mono {
+  --maroon-deep: #0c0d0e;
+  --ivory: #eef1f1;
+  --gold-soft: #c3c9ca;
+  background: #0c0d0e;
+  color: rgba(238, 241, 241, 0.68);
+}
+.footer.mono .brandName,
+.footer.mono .colTitle {
+  font-family: var(--sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.footer.mono .brandName {
+  letter-spacing: 0.02em;
+}
+.footer.mono .compliance li {
+  border-color: rgba(255, 255, 255, 0.22);
+  color: #c3c9ca;
+}
+.footer.mono .bottom {
+  border-top-color: rgba(255, 255, 255, 0.14);
+}
+
 /* Centered content width — full-bleed spread the four columns too thin, so the
    columns and the bottom row share one comfortable width and stay aligned. */
 .inner {

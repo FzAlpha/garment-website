@@ -1,12 +1,18 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { company, mailtoLink, telLink, telLinkAlt, whatsappLink } from "@/lib/company";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
   const year = new Date().getFullYear();
+  // The homepage uses the monochrome (VEXO) theme; match the footer to it there
+  // while inner pages keep the locked maroon identity.
+  const isHome = usePathname() === "/";
 
   return (
-    <footer className={styles.footer}>
+    <footer className={`${styles.footer} ${isHome ? styles.mono : ""}`}>
       <div className={styles.inner}>
         <div className={styles.grid}>
           <div className={styles.brandCol}>

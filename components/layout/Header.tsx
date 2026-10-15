@@ -33,10 +33,20 @@ export default function Header() {
   const isActive = (item: NavItem) =>
     pathname === item.href ||
     (item.href !== "/" && pathname.startsWith(item.href)) ||
-    (item.menu?.some((m) => pathname.startsWith(m.href)) ?? false);
+    (item.menu?.some((m) => pathname.startsWith(m.href)) ?? false) ||
+    (item.groups?.some(
+      (g) =>
+        pathname.startsWith(g.href) ||
+        g.items.some((m) => pathname.startsWith(m.href))
+    ) ??
+      false);
 
   return (
-    <header className={`${styles.header} ${solid ? styles.solid : ""}`}>
+    <header
+      className={`${styles.header} ${solid ? styles.solid : ""} ${
+        isHome ? styles.homeHeader : ""
+      }`}
+    >
       <div className={styles.inner}>
         <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
           <span className={styles.logo}>
@@ -72,7 +82,36 @@ export default function Header() {
           aria-label="Primary"
         >
           {primaryNav.map((item) =>
-            item.menu ? (
+            item.groups ? (
+              <div key={item.label} className={styles.hasMenu}>
+                <Link
+                  href={item.href}
+                  className={styles.link}
+                  data-active={isActive(item)}
+                >
+                  {item.label}
+                </Link>
+                <div className={`${styles.menu} ${styles.mega}`} role="menu">
+                  {item.groups.map((g) => (
+                    <div key={g.href} className={styles.megaCol}>
+                      <Link href={g.href} className={styles.megaHead}>
+                        {g.label}
+                      </Link>
+                      {g.items.map((m) => (
+                        <Link
+                          key={m.href}
+                          href={m.href}
+                          className={styles.menuLink}
+                          role="menuitem"
+                        >
+                          {m.label}
+                        </Link>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) : item.menu ? (
               <div key={item.label} className={styles.hasMenu}>
                 <Link
                   href={item.href}

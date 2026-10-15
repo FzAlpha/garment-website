@@ -19,6 +19,7 @@
   /* next/font injects --font-cormorant / --font-lato (see layout.tsx) */
   --serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
   --sans: var(--font-lato), "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --display: var(--font-anton), "Anton", "Arial Narrow", Impact, sans-serif;
 
   --radius: 0.875rem; /* 14px */
   --header-h: 4.25rem; /* 68px */
@@ -435,6 +436,143 @@ textarea:focus {
 .home .section > .container {
   position: relative;
   z-index: 1;
+}
+
+/* ============================================================================
+   Homepage — VEXO-style monochrome theme (scoped to `.home` only)
+   Inner pages keep the locked maroon/gold identity. The home section
+   components all read these tokens, so remapping them here flips the whole
+   homepage to a cool-grey / black-and-white palette automatically.
+   ========================================================================== */
+
+.home {
+  /* Palette remap: maroon/gold → monochrome greys + near-black */
+  --maroon: #16181a;
+  --maroon-deep: #0c0d0e;
+  --gold: #767c7e; /* muted grey accent (eyebrows / kickers) */
+  --gold-soft: #cdd3d4; /* light accent on dark bands */
+  --ivory: #eef1f1; /* light surfaces / text on dark */
+  --sand: #e2e7e8; /* tint band */
+  --ink: #17191a;
+  --muted: #6b7174;
+  --line: rgba(20, 22, 24, 0.14);
+
+  --shadow-card: 0 24px 44px -30px rgba(10, 12, 14, 0.5);
+  --shadow-lift: 0 14px 28px -16px rgba(10, 12, 14, 0.55);
+
+  background: #c7d0d1; /* cool-grey canvas behind the floating sections */
+  color: var(--ink);
+}
+
+/* Drop the warm dot texture — the VEXO canvas is clean. */
+.home .section::before,
+.home .section-dark::before {
+  content: none;
+}
+
+/* Display headlines: condensed grotesque, uppercase. Card titles: bold caps. */
+.home h1,
+.home h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.95;
+}
+.home h1 {
+  font-size: clamp(2.8rem, 8vw, 6rem);
+}
+.home h2 {
+  font-size: clamp(2.1rem, 5vw, 3.6rem);
+}
+.home h3,
+.home h4 {
+  font-family: var(--sans);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.home h1 em {
+  font-style: normal;
+  color: transparent;
+  -webkit-text-stroke: 1.5px currentColor;
+  text-stroke: 1.5px currentColor;
+}
+
+.home .eyebrow {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: var(--muted);
+}
+.home .section-dark .eyebrow {
+  color: var(--gold-soft);
+}
+
+/* Pill buttons: solid black / solid white, small uppercase labels. */
+.home .btn {
+  background: #16181a;
+  border-color: #16181a;
+  color: #fff;
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.6rem;
+}
+.home .btn:hover {
+  background: #000;
+  border-color: #000;
+}
+.home .btn-gold {
+  background: #fff;
+  border-color: #fff;
+  color: #16181a;
+}
+.home .btn-gold:hover {
+  background: #e7ebec;
+  border-color: #e7ebec;
+  color: #000;
+}
+.home .btn-ghost,
+.home .btn-ghost-light {
+  background: transparent;
+  border-color: currentColor;
+  color: var(--ink);
+}
+.home .btn-ghost:hover,
+.home .btn-ghost-light:hover {
+  background: #16181a;
+  border-color: #16181a;
+  color: #fff;
+}
+.home .section-dark .btn-ghost,
+.home .section-dark .btn-ghost-light {
+  color: #fff;
+}
+.home .section-dark .btn-ghost:hover,
+.home .section-dark .btn-ghost-light:hover {
+  background: #fff;
+  border-color: #fff;
+  color: #16181a;
+}
+
+/* Giant faint "ghost" outline word behind a section (VEXO signature). */
+.ghost-word {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-weight: 400;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(20, 22, 24, 0.12);
+  text-stroke: 1px rgba(20, 22, 24, 0.12);
+  line-height: 0.8;
+  letter-spacing: 0.02em;
+  pointer-events: none;
+  user-select: none;
+}
+.section-dark .ghost-word {
+  -webkit-text-stroke-color: rgba(255, 255, 255, 0.12);
+  text-stroke-color: rgba(255, 255, 255, 0.12);
 }
 
 /* ── Reduced motion ──────────────────────────────────────────────────────── */

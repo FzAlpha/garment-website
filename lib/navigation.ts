@@ -42,11 +42,20 @@ export interface NavMenuEntry {
   blurb: string;
 }
 
+export interface NavMenuGroup {
+  /** heading for a column in a grouped mega-menu (links to the overview page) */
+  label: string;
+  href: string;
+  items: NavMenuEntry[];
+}
+
 export interface NavItem {
   label: string;
   href: string;
-  /** optional dropdown / mega-menu entries */
+  /** optional single-list dropdown / mega-menu entries */
   menu?: NavMenuEntry[];
+  /** optional grouped mega-menu (columns with headings) */
+  groups?: NavMenuGroup[];
 }
 
 const uniformMenu: NavMenuEntry[] = uniformSectors.map((s) => ({
@@ -74,10 +83,15 @@ const capabilitiesMenu: NavMenuEntry[] = [
   { label: "Bulk Orders", href: "/bulk-orders", blurb: "Institutional & contract manufacturing" },
 ];
 
+/** Uniforms, Garments and Capabilities are unified under one "What We Make" menu. */
+const whatWeMakeGroups: NavMenuGroup[] = [
+  { label: "Uniform Solutions", href: "/uniforms", items: uniformMenu },
+  { label: "Garments", href: "/garments", items: garmentsMenu },
+  { label: "Capabilities", href: "/manufacturing", items: capabilitiesMenu },
+];
+
 export const primaryNav: NavItem[] = [
-  { label: "Uniform Solutions", href: "/uniforms", menu: uniformMenu },
-  { label: "Garments", href: "/garments", menu: garmentsMenu },
-  { label: "Capabilities", href: "/manufacturing", menu: capabilitiesMenu },
+  { label: "What We Make", href: "/uniforms", groups: whatWeMakeGroups },
   { label: "Industries", href: "/industries" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },

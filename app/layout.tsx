@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Lato } from "next/font/google";
+import { Cormorant_Garamond, Lato, Anton } from "next/font/google";
 import { brand, colors } from "@/lib/tokens";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
@@ -22,6 +22,14 @@ const lato = Lato({
   subsets: ["latin"],
   weight: ["400", "700"],
   variable: "--font-lato",
+  display: "swap",
+});
+
+// Display grotesque — used for the monochrome homepage (VEXO-style) headlines.
+const anton = Anton({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-anton",
   display: "swap",
 });
 
@@ -57,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${lato.variable}`}
+      className={`${cormorant.variable} ${lato.variable} ${anton.variable}`}
       suppressHydrationWarning
     >
       <body>
