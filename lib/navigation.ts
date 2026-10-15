@@ -1,6 +1,7 @@
 /** Central nav + category registry for the MPA. Keep in sync with data/products.ts slugs. */
 
 import { uniformSectors } from "@/data/uniforms";
+import { garmentRanges } from "@/data/ranges";
 
 export type CategorySlug =
   | "security-uniforms"
@@ -54,11 +55,18 @@ const uniformMenu: NavMenuEntry[] = uniformSectors.map((s) => ({
   blurb: s.blurb,
 }));
 
-const collectionsMenu: NavMenuEntry[] = categories.map((c) => ({
-  label: c.label,
-  href: c.href,
-  blurb: c.blurb,
-}));
+const garmentsMenu: NavMenuEntry[] = [
+  ...garmentRanges.map((r) => ({
+    label: r.label,
+    href: `/garments/${r.slug}`,
+    blurb: r.blurb,
+  })),
+  ...categories.map((c) => ({
+    label: c.label,
+    href: c.href,
+    blurb: c.blurb,
+  })),
+];
 
 const capabilitiesMenu: NavMenuEntry[] = [
   { label: "Custom Design & Development", href: "/custom", blurb: "Designed to your requirements" },
@@ -68,7 +76,7 @@ const capabilitiesMenu: NavMenuEntry[] = [
 
 export const primaryNav: NavItem[] = [
   { label: "Uniform Solutions", href: "/uniforms", menu: uniformMenu },
-  { label: "Products", href: "/products", menu: collectionsMenu },
+  { label: "Garments", href: "/garments", menu: garmentsMenu },
   { label: "Capabilities", href: "/manufacturing", menu: capabilitiesMenu },
   { label: "Industries", href: "/industries" },
   { label: "About", href: "/about" },

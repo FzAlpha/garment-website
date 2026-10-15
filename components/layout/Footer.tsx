@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { company, mailtoLink, telLink, telLinkAlt, whatsappLink } from "@/lib/company";
-import { categories } from "@/lib/navigation";
 import styles from "./Footer.module.css";
 
 export default function Footer() {
@@ -34,15 +33,14 @@ export default function Footer() {
             </div>
           </nav>
 
-          <nav aria-label="Collections">
-            <h2 className={styles.colTitle}>Collections</h2>
+          <nav aria-label="Garments">
+            <h2 className={styles.colTitle}>Garments</h2>
             <div className={styles.links}>
-              {categories.map((c) => (
-                <Link key={c.slug} href={c.href}>
-                  {c.label}
-                </Link>
-              ))}
-              <Link href="/products">All Products</Link>
+              <Link href="/garments/mens">Men&apos;s Wear</Link>
+              <Link href="/garments/womens">Women&apos;s Wear</Link>
+              <Link href="/garments/ethnic">Traditional &amp; Ethnic</Link>
+              <Link href="/garments/textiles">Textiles &amp; Fabrics</Link>
+              <Link href="/products">Production Collections</Link>
             </div>
           </nav>
 

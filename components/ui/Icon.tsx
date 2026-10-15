@@ -34,7 +34,12 @@ export type IconName =
   | "palette"
   | "printer"
   | "label"
-  | "pattern";
+  | "pattern"
+  // garment ranges
+  | "shirt"
+  | "dress"
+  | "ethnic"
+  | "fabric";
 
 const paths: Record<IconName, ReactNode> = {
   education: (
@@ -209,6 +214,30 @@ const paths: Record<IconName, ReactNode> = {
       <rect x="3" y="3" width="18" height="18" rx="2" />
       <path d="M3 9h18M9 3v18" />
       <path d="M13 13h4v4h-4z" />
+    </>
+  ),
+  shirt: (
+    <>
+      <path d="M8 3 4 6l2 2.5 1.5-1V21h9V7.5L18 8.5 20 6l-4-3-1.5 1.5a3 3 0 0 1-5 0L8 3Z" />
+    </>
+  ),
+  dress: (
+    <>
+      <path d="M9 3a3 3 0 0 0 6 0" />
+      <path d="M9 3 8 7 5.5 13c4 2.5 9 2.5 13 0L16 7l-1-4" />
+      <path d="M8 7h8" />
+    </>
+  ),
+  ethnic: (
+    <>
+      <path d="M12 3c4.5 1.8 6.5 5 6.5 9A6.5 6.5 0 0 1 6 12c0-2.2 1.3-3.5 3.3-3.5S12.6 10 12.6 12a2.1 2.1 0 0 1-4.2 0" />
+    </>
+  ),
+  fabric: (
+    <>
+      <path d="M3 7c3-2 6-2 9 0s6 2 9 0" />
+      <path d="M3 12c3-2 6-2 9 0s6 2 9 0" />
+      <path d="M3 17c3-2 6-2 9 0s6 2 9 0" />
     </>
   ),
 };

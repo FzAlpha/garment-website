@@ -52,6 +52,12 @@ export default function FlagshipShowcase() {
             );
           })}
         </div>
+
+        <div data-reveal style={{ marginTop: "clamp(2rem, 5vw, 3rem)", textAlign: "center" }}>
+          <Link href="/garments" className="btn btn-ghost">
+            View All Garment Ranges
+          </Link>
+        </div>
       </div>
     </section>
   );
