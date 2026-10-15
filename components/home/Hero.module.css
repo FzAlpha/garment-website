@@ -1,4 +1,5 @@
-/* VEXO-style monochrome hero: a floating light panel on the cool-grey canvas. */
+/* Faithful VEXO hero: floating light panel, centred headline + CTAs, a central
+   figure rising from the bottom, avatar cluster bottom-left, video bottom-right. */
 
 .hero {
   padding: calc(var(--header-h) + 1rem) clamp(0.75rem, 3vw, 1.75rem)
@@ -8,18 +9,14 @@
 .panel {
   position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  gap: clamp(2.5rem, 7vw, 5rem);
-  min-height: min(86svh, 50rem);
-  padding: clamp(2.5rem, 6vw, 5rem) clamp(1.5rem, 5vw, 4.5rem)
+  min-height: min(90svh, 52rem);
+  padding: clamp(2.25rem, 5vw, 4rem) clamp(1.5rem, 5vw, 4.5rem)
     clamp(1.75rem, 4vw, 3rem);
   border-radius: clamp(1.5rem, 3vw, 2.5rem);
-  background: linear-gradient(170deg, #f4f6f6 0%, #dfe5e6 60%, #cfd6d7 100%);
+  background: linear-gradient(170deg, #f4f6f6 0%, #dfe5e6 55%, #cfd6d7 100%);
   box-shadow: 0 40px 80px -60px rgba(10, 12, 14, 0.5);
 }
 
-/* Faint radiating guide lines fanning up from the lower-centre, like VEXO. */
 .rays {
   position: absolute;
   inset: 0;
@@ -29,11 +26,7 @@
     rgba(20, 22, 24, 0.05) 0deg 0.35deg,
     transparent 0.35deg 7deg
   );
-  mask-image: radial-gradient(
-    120% 100% at 50% 110%,
-    #000 0%,
-    transparent 70%
-  );
+  mask-image: radial-gradient(120% 100% at 50% 110%, #000 0%, transparent 70%);
   -webkit-mask-image: radial-gradient(
     120% 100% at 50% 110%,
     #000 0%,
@@ -43,23 +36,10 @@
 
 .top {
   position: relative;
-  z-index: 1;
+  z-index: 3;
   text-align: center;
 }
 
-.eyebrow {
-  display: block;
-  font-family: var(--sans);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #6b7174;
-  margin-bottom: clamp(1.25rem, 3vw, 2rem);
-}
-
-/* Compound selector (.hero .title) outranks the global `.home h1` rule so the
-   hero keeps full control of its headline sizing and the outlined word. */
 .hero .title {
   font-family: var(--display);
   font-weight: 400;
@@ -69,7 +49,7 @@
   line-height: 0.92;
   letter-spacing: -0.01em;
   margin-inline: auto;
-  max-width: 22ch;
+  max-width: 24ch;
 }
 .hero .title em {
   font-style: normal;
@@ -83,13 +63,37 @@
   flex-wrap: wrap;
   justify-content: center;
   gap: 0.75rem;
-  margin-top: clamp(1.5rem, 3vw, 2.25rem);
+  margin-top: clamp(1.25rem, 3vw, 2rem);
+}
+
+/* Central figure — rises from the bottom centre, greyscale, softly faded in. */
+.figure {
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateX(-50%);
+  width: clamp(16rem, 42vw, 32rem);
+  height: 74%;
+  z-index: 1;
+}
+.figureImg {
+  object-fit: cover;
+  object-position: center 25%;
+  filter: grayscale(1) contrast(1.04);
+  mask-image: linear-gradient(180deg, transparent 0%, #000 22%, #000 100%);
+  -webkit-mask-image: linear-gradient(
+    180deg,
+    transparent 0%,
+    #000 22%,
+    #000 100%
+  );
 }
 
 .bottom {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   margin-top: auto;
+  padding-top: clamp(8rem, 24vw, 16rem);
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
@@ -97,7 +101,7 @@
 }
 
 .intro {
-  max-width: 22rem;
+  max-width: 20rem;
 }
 .dots {
   display: flex;
@@ -115,7 +119,7 @@
   margin-left: 0;
 }
 .intro p {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   line-height: 1.55;
   color: #4c5254;
 }
@@ -132,7 +136,7 @@
 }
 .videoImg {
   object-fit: cover;
-  filter: grayscale(1) contrast(1.05) brightness(0.82);
+  filter: grayscale(1) contrast(1.05) brightness(0.8);
   transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .videoCard:hover .videoImg,
@@ -153,22 +157,17 @@
   color: #141618;
   padding-left: 0.15rem;
 }
-.videoLabel {
-  position: absolute;
-  left: 0.9rem;
-  bottom: 0.8rem;
-  font-family: var(--sans);
-  font-size: 0.68rem;
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: #fff;
-}
 
-@media (max-width: 40rem) {
+@media (max-width: 46rem) {
+  .figure {
+    width: 70vw;
+    height: 56%;
+    opacity: 0.85;
+  }
   .bottom {
     flex-direction: column;
     align-items: stretch;
+    padding-top: clamp(10rem, 60vw, 18rem);
   }
   .videoCard {
     width: 100%;

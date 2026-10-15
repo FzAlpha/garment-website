@@ -6,20 +6,25 @@
    ========================================================================== */
 
 :root {
-  --maroon: #5c0f1f;
-  --maroon-deep: #3a0812;
-  --gold: #b8893b;
-  --gold-soft: #e3c98f;
-  --ivory: #fbf6ec;
-  --sand: #f3e9d6;
-  --ink: #2a1a16;
-  --muted: #6d5a52;
-  --line: #e2d3b8;
+  /* VEXO monochrome palette. Variable names kept for compatibility; the warm
+     maroon/gold identity was retired in favour of a cool black-and-grey scheme
+     across the whole site. */
+  --maroon: #16181a;
+  --maroon-deep: #0c0d0e;
+  --gold: #767c7e;
+  --gold-soft: #cdd3d4;
+  --ivory: #eef1f1;
+  --sand: #e2e7e8;
+  --ink: #17191a;
+  --muted: #6b7174;
+  --line: rgba(20, 22, 24, 0.14);
 
   /* next/font injects --font-cormorant / --font-lato (see layout.tsx) */
-  --serif: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
-  --sans: var(--font-lato), "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* `--serif` now resolves to the display grotesque so every heading/title that
+     referenced it (inner-page component modules) adopts the VEXO look too. */
   --display: var(--font-anton), "Anton", "Arial Narrow", Impact, sans-serif;
+  --serif: var(--display);
+  --sans: var(--font-lato), "Lato", system-ui, -apple-system, "Segoe UI", sans-serif;
 
   --radius: 0.875rem; /* 14px */
   --header-h: 4.25rem; /* 68px */
@@ -52,12 +57,22 @@ body {
 }
 
 h1,
-h2,
+h2 {
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -0.005em;
+  text-transform: uppercase;
+  margin: 0;
+  text-wrap: balance;
+}
 h3,
 h4 {
-  font-family: var(--serif);
-  font-weight: 600;
-  line-height: 1.12;
+  font-family: var(--sans);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
   margin: 0;
   text-wrap: balance;
 }
@@ -66,8 +81,8 @@ h1 {
   font-size: clamp(2.4rem, 6vw, 4.25rem);
 }
 h1 em {
-  color: var(--maroon);
-  font-weight: 500;
+  color: var(--ink);
+  font-weight: 400;
   font-style: normal;
 }
 h2 {
@@ -159,8 +174,9 @@ img {
   padding: 0.85rem 1.7rem;
   font-family: var(--sans);
   font-weight: 700;
-  font-size: 1rem;
-  letter-spacing: 0.03em;
+  font-size: 0.82rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
   transition: background 0.25s, color 0.25s, border-color 0.25s, transform 0.25s,

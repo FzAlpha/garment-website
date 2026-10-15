@@ -1,0 +1,63 @@
+import Link from "next/link";
+import styles from "./clone.module.css";
+
+const Arrow = () => (
+  <svg className={styles.arrow} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+    <path d="M9 6l6 6-6 6" />
+  </svg>
+);
+
+const Heart = () => (
+  <span className={styles.heart} aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2">
+      <path d="M12 20s-7-4.6-9.3-8.3C1 8.9 2.3 5.8 5.3 5.4c1.8-.2 3.3.9 3.7 2 .4-1.1 1.9-2.2 3.7-2 3 .4 4.3 3.5 2.6 6.3C19 15.4 12 20 12 20z" />
+    </svg>
+  </span>
+);
+
+const Label = () => (
+  <span className={styles.label}>
+    <span>
+      <b>ASRV x Equinox Lycra</b>
+      <small>USD 116.00</small>
+    </span>
+    <Arrow />
+  </span>
+);
+
+export default function ProductGrid() {
+  const row1 = [0, 1, 2, 3];
+  const row2 = [4, 5, 6, 7];
+
+  return (
+    <section className={styles.wrap}>
+      <div className={styles.inner}>
+        <div className={styles.grid} data-reveal-group>
+          {row1.map((i) => (
+            <Link key={i} href="/products" className={styles.product}>
+              <Label />
+            </Link>
+          ))}
+          {row2.map((i) => (
+            <Link key={i} href="/products" className={styles.product}>
+              <span className={styles.tag}>
+                <span className={styles.pill}>Winter</span>
+                <Heart />
+              </span>
+              <Label />
+            </Link>
+          ))}
+        </div>
+
+        <div className={styles.seeAll} data-reveal>
+          <Link href="/products" className="btn">
+            See All Brands
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M7 17L17 7M9 7h8v8" />
+            </svg>
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}

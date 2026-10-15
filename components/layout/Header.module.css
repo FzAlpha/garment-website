@@ -61,10 +61,11 @@
   line-height: 1;
 }
 .brandName {
-  font-family: var(--serif);
-  font-weight: 600;
-  font-size: 1.6rem;
-  letter-spacing: 0.04em;
+  font-family: var(--display);
+  font-weight: 400;
+  font-size: 1.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
 .solid .brandName {
   color: var(--maroon);
@@ -222,6 +223,47 @@
   color: var(--ivory);
 }
 
+/* ── Homepage: centred (VEXO) nav — links split around a centred wordmark ── */
+.centered {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+.side {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.9rem, 1.8vw, 1.8rem);
+}
+.sideLeft {
+  justify-content: flex-start;
+}
+.sideRight {
+  justify-content: flex-end;
+}
+.wordmark {
+  font-family: var(--display);
+  font-size: clamp(1.4rem, 2.4vw, 1.95rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: inherit;
+  white-space: nowrap;
+}
+/* The homepage mega-menu opens to the RIGHT of its left-side trigger. */
+.centered .mega {
+  left: 0;
+  right: auto;
+  transform: translateY(0.4rem);
+}
+.centered .hasMenu:hover .mega,
+.centered .hasMenu:focus-within .mega {
+  transform: translateY(0);
+}
+.mobileNav {
+  display: none;
+}
+
 /* Homepage (VEXO monochrome canvas): dark neutral text + black pill CTA,
    even in the transparent top state. Keeps the maroon/gold off the home page. */
 .homeHeader:not(.solid) {
@@ -344,7 +386,8 @@
     grid-template-columns: 1fr;
     min-width: 0;
   }
-  .mega {
+  .mega,
+  .centered .mega {
     grid-template-columns: 1fr;
     min-width: 0;
     left: auto;
@@ -352,6 +395,40 @@
     transform: none;
     gap: 0;
     padding: 0.25rem 0 0.5rem 0.75rem;
+  }
+
+  /* Centred home nav collapses to wordmark + hamburger + dropdown. */
+  .centered {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .centered .side {
+    display: none;
+  }
+  .centered .wordmark {
+    font-size: 1.5rem;
+  }
+  .centered .toggle {
+    display: block;
+  }
+  .mobileNav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: var(--ivory);
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    padding: 0.5rem 1.25rem 1.5rem;
+    box-shadow: var(--shadow-card);
+  }
+  .mobileNav.navOpen {
+    display: flex;
   }
   .megaCol {
     margin-top: 0.4rem;

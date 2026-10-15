@@ -9,22 +9,30 @@ export default function Hero() {
         <span className={styles.rays} aria-hidden="true" />
 
         <div className={styles.top}>
-          <span className={styles.eyebrow}>
-            Customized Uniforms &amp; Garment Manufacturing
-          </span>
           <h1 className={styles.title}>
-            Uniforms For Every
+            Gear Up Every Season
             <br />
-            Sector, Every <em>Shift</em>
+            Every <em>Workout!</em>
           </h1>
           <div className={styles.actions}>
-            <Link href="/quote" className="btn">
-              Request a Quote
+            <Link href="/products" className="btn">
+              Shop Now
             </Link>
             <Link href="/uniforms" className="btn btn-gold">
-              Explore Solutions
+              Explore All
             </Link>
           </div>
+        </div>
+
+        <div className={styles.figure} aria-hidden="true">
+          <Image
+            src="/images/hero-factory.jpg"
+            alt=""
+            fill
+            priority
+            sizes="(max-width: 48rem) 90vw, 40vw"
+            className={styles.figureImg}
+          />
         </div>
 
         <div className={styles.bottom}>
@@ -35,21 +43,20 @@ export default function Hero() {
               <span />
             </div>
             <p>
-              Made in India and supplied worldwide — customized uniforms and
-              garments for institutions, companies and organizations.
+              Stay cozy without compromising your range of motion. Our women&apos;s
+              winter range is perfect for those chilly outdoor workouts.
             </p>
           </div>
 
           <Link
             href="/manufacturing"
             className={styles.videoCard}
-            aria-label="See how we manufacture"
+            aria-label="Watch"
           >
             <Image
               src="/images/hero-factory.jpg"
               alt=""
               fill
-              priority
               sizes="(max-width: 48rem) 60vw, 22rem"
               className={styles.videoImg}
             />
@@ -58,7 +65,6 @@ export default function Hero() {
                 <path d="M8 5v14l11-7z" />
               </svg>
             </span>
-            <span className={styles.videoLabel}>Inside Our Plant</span>
           </Link>
         </div>
       </div>

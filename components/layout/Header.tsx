@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -41,119 +41,144 @@ export default function Header() {
     ) ??
       false);
 
+  const renderItem = (item: NavItem): ReactNode =>
+    item.groups ? (
+      <div key={item.label} className={styles.hasMenu}>
+        <Link href={item.href} className={styles.link} data-active={isActive(item)}>
+          {item.label}
+        </Link>
+        <div className={`${styles.menu} ${styles.mega}`} role="menu">
+          {item.groups.map((g) => (
+            <div key={g.href} className={styles.megaCol}>
+              <Link href={g.href} className={styles.megaHead}>
+                {g.label}
+              </Link>
+              {g.items.map((m) => (
+                <Link key={m.href} href={m.href} className={styles.menuLink} role="menuitem">
+                  {m.label}
+                </Link>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    ) : item.menu ? (
+      <div key={item.label} className={styles.hasMenu}>
+        <Link href={item.href} className={styles.link} data-active={isActive(item)}>
+          {item.label}
+        </Link>
+        <div
+          className={`${styles.menu} ${item.menu.length > 5 ? styles.menuWide : ""}`}
+          role="menu"
+        >
+          {item.menu.map((m) => (
+            <Link key={m.href} href={m.href} className={styles.menuLink} role="menuitem">
+              {m.label}
+              <small>{m.blurb}</small>
+            </Link>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <Link
+        key={item.label}
+        href={item.href}
+        className={styles.link}
+        data-active={isActive(item)}
+      >
+        {item.label}
+      </Link>
+    );
+
+  const wordmark = (
+    <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
+      <span className={styles.logo}>
+        <Image
+          src={brand.mark}
+          alt=""
+          width={40}
+          height={40}
+          className={styles.logoImg}
+          priority
+        />
+      </span>
+      <span className={styles.brandText}>
+        <span className={styles.brandName}>{brand.name}</span>
+        <span className={styles.brandSub}>Garment Manufacturing</span>
+      </span>
+    </Link>
+  );
+
+  const toggle = (
+    <button
+      type="button"
+      className={styles.toggle}
+      aria-expanded={open}
+      aria-controls="primary-nav"
+      aria-label="Toggle navigation menu"
+      onClick={() => setOpen((v) => !v)}
+    >
+      <span className={styles.bar} />
+    </button>
+  );
+
+  // Split the nav around the centred wordmark for the homepage (VEXO layout).
+  const mid = Math.ceil(primaryNav.length / 2);
+  const leftItems = primaryNav.slice(0, mid);
+  const rightItems = primaryNav.slice(mid);
+
   return (
     <header
       className={`${styles.header} ${solid ? styles.solid : ""} ${
         isHome ? styles.homeHeader : ""
       }`}
     >
-      <div className={styles.inner}>
-        <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
-          <span className={styles.logo}>
-            <Image
-              src={brand.mark}
-              alt=""
-              width={40}
-              height={40}
-              className={styles.logoImg}
-              priority
-            />
-          </span>
-          <span className={styles.brandText}>
-            <span className={styles.brandName}>{brand.name}</span>
-            <span className={styles.brandSub}>Garment Manufacturing</span>
-          </span>
-        </Link>
+      {isHome ? (
+        <div className={`${styles.inner} ${styles.centered}`}>
+          <nav className={`${styles.side} ${styles.sideLeft}`} aria-label="Primary">
+            {leftItems.map(renderItem)}
+          </nav>
 
-        <button
-          type="button"
-          className={styles.toggle}
-          aria-expanded={open}
-          aria-controls="primary-nav"
-          aria-label="Toggle navigation menu"
-          onClick={() => setOpen((v) => !v)}
-        >
-          <span className={styles.bar} />
-        </button>
-
-        <nav
-          id="primary-nav"
-          className={`${styles.nav} ${open ? styles.navOpen : ""}`}
-          aria-label="Primary"
-        >
-          {primaryNav.map((item) =>
-            item.groups ? (
-              <div key={item.label} className={styles.hasMenu}>
-                <Link
-                  href={item.href}
-                  className={styles.link}
-                  data-active={isActive(item)}
-                >
-                  {item.label}
-                </Link>
-                <div className={`${styles.menu} ${styles.mega}`} role="menu">
-                  {item.groups.map((g) => (
-                    <div key={g.href} className={styles.megaCol}>
-                      <Link href={g.href} className={styles.megaHead}>
-                        {g.label}
-                      </Link>
-                      {g.items.map((m) => (
-                        <Link
-                          key={m.href}
-                          href={m.href}
-                          className={styles.menuLink}
-                          role="menuitem"
-                        >
-                          {m.label}
-                        </Link>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            ) : item.menu ? (
-              <div key={item.label} className={styles.hasMenu}>
-                <Link
-                  href={item.href}
-                  className={styles.link}
-                  data-active={isActive(item)}
-                >
-                  {item.label}
-                </Link>
-                <div
-                  className={`${styles.menu} ${item.menu.length > 5 ? styles.menuWide : ""}`}
-                  role="menu"
-                >
-                  {item.menu.map((m) => (
-                    <Link
-                      key={m.href}
-                      href={m.href}
-                      className={styles.menuLink}
-                      role="menuitem"
-                    >
-                      {m.label}
-                      <small>{m.blurb}</small>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            ) : (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={styles.link}
-                data-active={isActive(item)}
-              >
-                {item.label}
-              </Link>
-            )
-          )}
-
-          <Link href="/quote" className={`btn ${styles.cta}`}>
-            Request a Quote
+          <Link href="/" className={styles.wordmark} aria-label={`${brand.name} home`}>
+            {brand.name}
           </Link>
-        </nav>
-      </div>
+
+          <div className={`${styles.side} ${styles.sideRight}`}>
+            {rightItems.map(renderItem)}
+            <Link href="/quote" className={`btn ${styles.cta}`}>
+              Request a Quote
+            </Link>
+          </div>
+
+          {toggle}
+
+          <nav
+            id="primary-nav"
+            className={`${styles.mobileNav} ${open ? styles.navOpen : ""}`}
+            aria-label="Primary"
+          >
+            {primaryNav.map(renderItem)}
+            <Link href="/quote" className={`btn ${styles.cta}`}>
+              Request a Quote
+            </Link>
+          </nav>
+        </div>
+      ) : (
+        <div className={styles.inner}>
+          {wordmark}
+          {toggle}
+          <nav
+            id="primary-nav"
+            className={`${styles.nav} ${open ? styles.navOpen : ""}`}
+            aria-label="Primary"
+          >
+            {primaryNav.map(renderItem)}
+            <Link href="/quote" className={`btn ${styles.cta}`}>
+              Request a Quote
+            </Link>
+          </nav>
+        </div>
+      )}
     </header>
   );
 }
