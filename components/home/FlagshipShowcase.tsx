@@ -15,12 +15,13 @@ export default function FlagshipShowcase() {
     <section className="section" id="collections">
       <div className="container">
         <div className="section-head" data-reveal>
-          <span className="eyebrow">Flagship Collections</span>
-          <h2>Three Specialised Manufacturing Lines</h2>
+          <span className="eyebrow">Garment Collections</span>
+          <h2>Specialised Manufacturing Lines</h2>
           <p className="section-intro">
             Purpose-built production lines for institutional, corporate, and
             retail apparel — each with dedicated fabric programmes, sizing and
-            finishing.
+            finishing. Men&apos;s, women&apos;s and ethnic ranges available on
+            request.
           </p>
         </div>
 

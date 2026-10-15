@@ -1,0 +1,60 @@
+.grid {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+.card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.7rem 1.5rem;
+  transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
+}
+.card:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: var(--shadow-card);
+  border-color: var(--gold);
+}
+.icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background: rgba(184, 137, 59, 0.14);
+  color: var(--maroon);
+  margin-bottom: 0.9rem;
+}
+.card h3 {
+  color: var(--maroon);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.card p {
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
+.compliance {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  list-style: none;
+  margin: clamp(2rem, 5vw, 3rem) 0 0;
+  padding: 0;
+}
+.compliance li {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--maroon-deep);
+  background: rgba(184, 137, 59, 0.14);
+  border: 1px solid var(--gold);
+  border-radius: 999px;
+  padding: 0.4rem 1rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card:hover {
+    transform: none;
+  }
+}

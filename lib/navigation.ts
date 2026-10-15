@@ -1,5 +1,7 @@
 /** Central nav + category registry for the MPA. Keep in sync with data/products.ts slugs. */
 
+import { uniformSectors } from "@/data/uniforms";
+
 export type CategorySlug =
   | "security-uniforms"
   | "premium-formal"
@@ -33,9 +35,42 @@ export const categories: CategoryLink[] = [
   },
 ];
 
-export const primaryNav = [
-  { label: "Collections", href: "/products", hasMenu: true },
-  { label: "Manufacturing", href: "/manufacturing", hasMenu: false },
-  { label: "About Us", href: "/about", hasMenu: false },
-  { label: "Contact", href: "/contact", hasMenu: false },
-] as const;
+export interface NavMenuEntry {
+  label: string;
+  href: string;
+  blurb: string;
+}
+
+export interface NavItem {
+  label: string;
+  href: string;
+  /** optional dropdown / mega-menu entries */
+  menu?: NavMenuEntry[];
+}
+
+const uniformMenu: NavMenuEntry[] = uniformSectors.map((s) => ({
+  label: s.label,
+  href: `/uniforms/${s.slug}`,
+  blurb: s.blurb,
+}));
+
+const collectionsMenu: NavMenuEntry[] = categories.map((c) => ({
+  label: c.label,
+  href: c.href,
+  blurb: c.blurb,
+}));
+
+const capabilitiesMenu: NavMenuEntry[] = [
+  { label: "Custom Design & Development", href: "/custom", blurb: "Designed to your requirements" },
+  { label: "Manufacturing & Quality", href: "/manufacturing", blurb: "In-house production & AQL 2.5" },
+  { label: "Bulk Orders", href: "/bulk-orders", blurb: "Institutional & contract manufacturing" },
+];
+
+export const primaryNav: NavItem[] = [
+  { label: "Uniform Solutions", href: "/uniforms", menu: uniformMenu },
+  { label: "Products", href: "/products", menu: collectionsMenu },
+  { label: "Capabilities", href: "/manufacturing", menu: capabilitiesMenu },
+  { label: "Industries", href: "/industries" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];

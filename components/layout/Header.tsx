@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { brand } from "@/lib/tokens";
-import { categories, primaryNav } from "@/lib/navigation";
+import { primaryNav, type NavItem } from "@/lib/navigation";
 import styles from "./Header.module.css";
 
 export default function Header() {
@@ -29,6 +29,11 @@ export default function Header() {
 
   // Header is transparent only at the top of the homepage; solid everywhere else.
   const solid = !isHome || scrolled;
+
+  const isActive = (item: NavItem) =>
+    pathname === item.href ||
+    (item.href !== "/" && pathname.startsWith(item.href)) ||
+    (item.menu?.some((m) => pathname.startsWith(m.href)) ?? false);
 
   return (
     <header className={`${styles.header} ${solid ? styles.solid : ""}`}>
@@ -67,35 +72,38 @@ export default function Header() {
           aria-label="Primary"
         >
           {primaryNav.map((item) =>
-            item.hasMenu ? (
-              <div key={item.href} className={styles.hasMenu}>
+            item.menu ? (
+              <div key={item.label} className={styles.hasMenu}>
                 <Link
                   href={item.href}
                   className={styles.link}
-                  data-active={pathname.startsWith("/products")}
+                  data-active={isActive(item)}
                 >
                   {item.label}
                 </Link>
-                <div className={styles.menu} role="menu">
-                  {categories.map((c) => (
+                <div
+                  className={`${styles.menu} ${item.menu.length > 5 ? styles.menuWide : ""}`}
+                  role="menu"
+                >
+                  {item.menu.map((m) => (
                     <Link
-                      key={c.slug}
-                      href={c.href}
+                      key={m.href}
+                      href={m.href}
                       className={styles.menuLink}
                       role="menuitem"
                     >
-                      {c.label}
-                      <small>{c.blurb}</small>
+                      {m.label}
+                      <small>{m.blurb}</small>
                     </Link>
                   ))}
                 </div>
               </div>
             ) : (
               <Link
-                key={item.href}
+                key={item.label}
                 href={item.href}
                 className={styles.link}
-                data-active={pathname === item.href}
+                data-active={isActive(item)}
               >
                 {item.label}
               </Link>

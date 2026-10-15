@@ -24,6 +24,16 @@ export default function Footer() {
             </ul>
           </div>
 
+          <nav aria-label="Solutions">
+            <h2 className={styles.colTitle}>Solutions</h2>
+            <div className={styles.links}>
+              <Link href="/uniforms">Uniform Solutions</Link>
+              <Link href="/custom">Custom Design</Link>
+              <Link href="/bulk-orders">Bulk Orders</Link>
+              <Link href="/industries">Industries</Link>
+            </div>
+          </nav>
+
           <nav aria-label="Collections">
             <h2 className={styles.colTitle}>Collections</h2>
             <div className={styles.links}>
@@ -39,7 +49,8 @@ export default function Footer() {
           <nav aria-label="Company">
             <h2 className={styles.colTitle}>Company</h2>
             <div className={styles.links}>
-              <Link href="/manufacturing">Manufacturing</Link>
+              <Link href="/manufacturing">Manufacturing &amp; Quality</Link>
+              <Link href="/global">Global Supply</Link>
               <Link href="/about">About Us</Link>
               <Link href="/quote">Request a Quote</Link>
               <Link href="/contact">Contact</Link>

@@ -25,20 +25,20 @@ export default function Hero() {
       <div className={`container ${styles.inner}`}>
         <div className={styles.copy}>
           <span className={`eyebrow ${styles.eyebrow}`}>
-            Precision Craftsmanship &amp; Bulk Production
+            Customized Uniforms &amp; Garment Manufacturing
           </span>
           <h1>
-            Premier Garment Manufacturing &amp;{" "}
-            <em>Uniform Solutions</em>
+            India-Based Garment Manufacturing.{" "}
+            <em>Global Supply Capability.</em>
           </h1>
           <p className={styles.lead}>
-            Engineered in India, trusted worldwide. From institutional security
-            uniforms to executive formal wear and premium knits — Prolink
-            delivers tech-pack-accurate garments at scale.
+            Prolink manufactures customized uniforms and garments for
+            institutions, companies and organizations — designed to your
+            requirements and supplied across India and international markets.
           </p>
           <div className={styles.actions}>
-            <Link href="/products" className="btn btn-gold">
-              Explore Collections
+            <Link href="/uniforms" className="btn btn-gold">
+              Explore Uniform Solutions
             </Link>
             <Link href="/quote" className="btn btn-ghost-light">
               Request a Quote

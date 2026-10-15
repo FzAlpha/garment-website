@@ -77,10 +77,53 @@
   font-size: 0.95rem;
 }
 
+.scales {
+  display: grid;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+}
+.scaleCard {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  border-radius: var(--radius);
+  padding: 1.7rem 1.5rem;
+  transition: transform 0.35s, box-shadow 0.35s;
+}
+.scaleCard:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: var(--shadow-card);
+}
+.scaleIcon {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: rgba(184, 137, 59, 0.14);
+  color: var(--maroon);
+  margin-bottom: 0.9rem;
+}
+.scaleCard h3 {
+  color: var(--maroon);
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+.scaleCard p {
+  color: var(--muted);
+  font-size: 0.96rem;
+}
+
 .metrics {
   display: grid;
   gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scaleCard:hover {
+    transform: none;
+  }
 }
 .metric {
   border: 1px solid rgba(227, 201, 143, 0.3);

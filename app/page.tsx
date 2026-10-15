@@ -1,7 +1,11 @@
 import Link from "next/link";
 import Hero from "@/components/home/Hero";
-import FlagshipShowcase from "@/components/home/FlagshipShowcase";
+import UniformSolutions from "@/components/home/UniformSolutions";
 import MachineryShowcase from "@/components/home/MachineryShowcase";
+import IndustriesGrid from "@/components/home/IndustriesGrid";
+import CapabilitiesBand from "@/components/home/CapabilitiesBand";
+import FlagshipShowcase from "@/components/home/FlagshipShowcase";
+import GlobalSupply from "@/components/home/GlobalSupply";
 import WhyChooseUs from "@/components/home/WhyChooseUs";
 
 export default function HomePage() {
@@ -10,16 +14,28 @@ export default function HomePage() {
       {/* Section 1 — Hero */}
       <Hero />
 
-      {/* Section 2 — Flagship Collections */}
-      <FlagshipShowcase />
+      {/* Section 2 — Uniform Solutions (primary focus) */}
+      <UniformSolutions />
 
-      {/* Section 3 — Factory Machinery (mandatory 3rd section) */}
+      {/* Section 3 — Factory Machinery (mandatory 3rd section per claude.md) */}
       <MachineryShowcase />
 
-      {/* Section 4 — Why Prolink */}
+      {/* Section 4 — Industries We Serve */}
+      <IndustriesGrid />
+
+      {/* Section 5 — Capability (custom / manufacturing / bulk) */}
+      <CapabilitiesBand />
+
+      {/* Section 6 — Garment Collections */}
+      <FlagshipShowcase />
+
+      {/* Section 7 — India-based, global supply */}
+      <GlobalSupply />
+
+      {/* Section 8 — Why Prolink */}
       <WhyChooseUs />
 
-      {/* Section 5 — Conversion CTA */}
+      {/* Section 9 — Conversion CTA */}
       <section className="section section-dark" id="cta">
         <div className="container" data-reveal style={{ textAlign: "center", maxWidth: "48rem", marginInline: "auto" }}>
           <span className="eyebrow">Let&apos;s Build Your Order</span>

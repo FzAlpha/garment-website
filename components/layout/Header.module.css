@@ -81,14 +81,15 @@
 .nav {
   display: flex;
   align-items: center;
-  gap: 1.75rem;
+  gap: clamp(1rem, 1.6vw, 1.6rem);
 }
 
 .link {
   position: relative;
   color: inherit;
   text-decoration: none;
-  font-size: 0.98rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
   background: none;
   border: 0;
   font-family: inherit;
@@ -139,6 +140,11 @@
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
+}
+/* Wide two-column mega-menu for long lists (e.g. uniform sectors). */
+.menuWide {
+  grid-template-columns: repeat(2, minmax(13rem, 1fr));
+  min-width: 30rem;
 }
 .menuLink {
   display: block;
@@ -224,7 +230,7 @@
   transform: translateY(-0.45rem) rotate(-45deg);
 }
 
-@media (max-width: 52rem) {
+@media (max-width: 64rem) {
   .toggle {
     display: block;
   }
@@ -265,6 +271,10 @@
     box-shadow: none;
     border: 0;
     padding: 0.25rem 0 0.5rem 0.75rem;
+    min-width: 0;
+  }
+  .menuWide {
+    grid-template-columns: 1fr;
     min-width: 0;
   }
   .cta,

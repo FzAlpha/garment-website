@@ -44,9 +44,15 @@ export default function AboutPage() {
             sizing — then manufacture it at scale with consistent quality.
           </p>
           <p className="section-intro">
-            From institutional security uniforms and corporate formal wear to
-            premium 180–200 GSM knits, our focus is the same: precision,
+            Our core focus is customized uniforms and garment manufacturing —
+            from institutional security and healthcare wear to corporate formal
+            and premium knits. The priority is always the same: precision,
             durability and reliability that demanding buyers can plan around.
+          </p>
+          <p className="section-intro">
+            Our manufacturing unit is based in India, while our vision is to
+            serve customers across India and international markets — supplying
+            organizations, distributors, corporates and institutions worldwide.
           </p>
         </div>
       </section>
@@ -88,7 +94,7 @@ export default function AboutPage() {
           </p>
           <div style={{ marginTop: "2rem", display: "flex", gap: "0.9rem", justifyContent: "center", flexWrap: "wrap" }}>
             <Link href="/quote" className="btn btn-gold">Request a Quote</Link>
-            <Link href="/manufacturing" className="btn btn-ghost-light">See Our Factory</Link>
+            <Link href="/global" className="btn btn-ghost-light">Global Supply</Link>
           </div>
         </div>
       </section>

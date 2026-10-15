@@ -8,7 +8,7 @@
 /* Centered content width — full-bleed spread the four columns too thin, so the
    columns and the bottom row share one comfortable width and stay aligned. */
 .inner {
-  width: min(72rem, 100% - 3rem);
+  width: min(80rem, 100% - 3rem);
   margin-inline: auto;
 }
 

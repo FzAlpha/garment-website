@@ -2,13 +2,15 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageBanner from "@/components/ui/PageBanner";
+import Icon from "@/components/ui/Icon";
 import { machines, factoryWorkflow, plantMetrics } from "@/data/machinery";
+import { productionScales } from "@/data/capabilities";
 import styles from "./manufacturing.module.css";
 
 export const metadata: Metadata = {
-  title: "Manufacturing & Machinery",
+  title: "Manufacturing & Quality",
   description:
-    "Inside the Prolink factory — computerized lockstitch, overlock, flatlock, cutting and finishing lines, with a 6-stage production workflow and AQL 2.5 quality control.",
+    "Inside the Prolink factory — cutting, computerized stitching, embroidery, printing, finishing and AQL 2.5 quality control, with flexible small, medium and bulk production for customized garments and uniforms.",
 };
 
 export default function ManufacturingPage() {
@@ -66,6 +68,32 @@ export default function ManufacturingPage() {
                 <div className={styles.stepNum}>{String(s.step).padStart(2, "0")}</div>
                 <h3>{s.title}</h3>
                 <p>{s.detail}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Production flexibility */}
+      <section className="section">
+        <div className="container">
+          <div className="section-head" data-reveal>
+            <span className="eyebrow">Production Flexibility</span>
+            <h2>Small, Medium &amp; Bulk Production</h2>
+            <p className="section-intro">
+              We handle small, medium and bulk requirements depending on the
+              product and order — so you can trial a programme before scaling to
+              volume.
+            </p>
+          </div>
+          <div className={styles.scales} data-reveal-group>
+            {productionScales.map((s) => (
+              <article className={styles.scaleCard} key={s.title}>
+                <span className={styles.scaleIcon}>
+                  <Icon name={s.icon} />
+                </span>
+                <h3>{s.title}</h3>
+                <p>{s.body}</p>
               </article>
             ))}
           </div>
