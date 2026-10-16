@@ -1,5 +1,12 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
 import styles from "./clone.module.css";
+import SplitHeading from "./motion/SplitHeading";
+import Reveal from "./motion/Reveal";
+import { useEnter } from "./motion/deck/useEnter";
+import { addSplit, addAnim } from "./motion/deck/enterHelpers";
 
 const Arrow = () => (
   <svg className={styles.arrow} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
@@ -26,20 +33,35 @@ const Label = () => (
 );
 
 export default function ProductGrid() {
+  const root = useRef<HTMLElement>(null);
   const row1 = [0, 1, 2, 3];
   const row2 = [4, 5, 6, 7];
 
+  useEnter(root, (tl, r) => {
+    addSplit(tl, r, 0);
+    addAnim(tl, r, "rise", 0.15, 0.07); // 8-card left→right wave
+    addAnim(tl, r, "fade", ">-0.1");
+  });
+
   return (
-    <section className={styles.wrap}>
+    <section className={styles.wrap} data-fit="panel" ref={root}>
       <div className={styles.inner}>
-        <div className={styles.grid}>
+        <SplitHeading
+          as="h2"
+          text="Fresh Fits For Your Next Workout!"
+          className={styles.gridHead}
+        />
+
+        <div className={styles.grid} data-grid>
           {row1.map((i) => (
             <Link key={i} href="/products" className={styles.product} data-anim="rise">
+              <span className={styles.media} aria-hidden="true" />
               <Label />
             </Link>
           ))}
           {row2.map((i) => (
             <Link key={i} href="/products" className={styles.product} data-anim="rise">
+              <span className={styles.media} aria-hidden="true" />
               <span className={styles.tag}>
                 <span className={styles.pill}>Winter</span>
                 <Heart />
@@ -49,14 +71,14 @@ export default function ProductGrid() {
           ))}
         </div>
 
-        <div className={styles.seeAll} data-anim="fade">
+        <Reveal className={styles.seeAll} variant="fade">
           <Link href="/products" className="btn">
             See All Brands
             <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M7 17L17 7M9 7h8v8" />
             </svg>
           </Link>
-        </div>
+        </Reveal>
       </div>
     </section>
   );

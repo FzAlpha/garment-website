@@ -1,0 +1,42 @@
+.wrap {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.slats {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+/* Each strip shows its own horizontal slice of --img. background-size 100% 1200%
+   makes the image 12× tall; background-position-y steps 0%→100% across strips so
+   the slices reconstruct the full image. */
+.slat {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(var(--i) * 100% / 12);
+  height: calc(100% / 12 + 0.5px); /* hairline overlap hides seams */
+  background-image: var(--img);
+  background-repeat: no-repeat;
+  background-size: 100% 1200%;
+  background-position: 50% calc(var(--i) / var(--n) * 100%);
+  transform-origin: bottom center;
+  transform: scaleY(1);
+  will-change: transform;
+}
+
+/* Pre-hide only once JS motion is active, so reduced-motion / no-JS keep the
+   image fully visible. */
+:global(.reveal-ready) .slat {
+  transform: scaleY(0);
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}

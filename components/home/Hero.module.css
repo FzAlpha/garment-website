@@ -23,7 +23,6 @@
   inset: 0 0 auto 0;
   height: clamp(4.5rem, 7vw, 6rem);
   z-index: 6;
-  animation: heroFade 0.8s ease both;
 }
 .navBand {
   position: absolute;
@@ -126,7 +125,6 @@
   position: relative;
   z-index: 3;
   text-align: center;
-  animation: heroRise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.08s both;
 }
 .hero .title {
   font-family: var(--display);
@@ -139,7 +137,14 @@
   margin-inline: auto;
   max-width: 24ch;
 }
-.hero .title em {
+.titleLine {
+  display: block;
+}
+.title [data-hero-word] {
+  display: inline-block;
+  will-change: transform;
+}
+.titleEm {
   font-style: normal;
   color: transparent;
   -webkit-text-stroke: 1.5px #141618;
@@ -155,13 +160,14 @@
 
 .figure {
   position: absolute;
-  left: 50%;
+  left: 0;
+  right: 0;
   bottom: 0;
-  transform: translateX(-50%);
+  margin-inline: auto;
   width: clamp(16rem, 42vw, 32rem);
   height: 70%;
   z-index: 1;
-  animation: heroFigure 1.1s cubic-bezier(0.2, 0.7, 0.2, 1) 0.15s both;
+  transform-origin: 50% 100%;
 }
 .figureImg {
   object-fit: cover;
@@ -180,7 +186,6 @@
   align-items: flex-end;
   justify-content: space-between;
   gap: 1.5rem;
-  animation: heroFade 0.9s ease 0.3s both;
 }
 .intro {
   max-width: 20rem;
@@ -240,28 +245,6 @@
   padding-left: 0.15rem;
 }
 
-@keyframes heroRise {
-  from {
-    opacity: 0;
-    transform: translateY(2rem);
-  }
-}
-@keyframes heroFigure {
-  from {
-    opacity: 0;
-    transform: translateX(-50%) translateY(2.5rem) scale(1.04);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0) scale(1);
-  }
-}
-@keyframes heroFade {
-  from {
-    opacity: 0;
-  }
-}
-
 @media (max-width: 60rem) {
   .navLeft {
     display: none;
@@ -302,12 +285,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .navWrap,
-  .top,
-  .figure,
-  .bottom {
-    animation: none;
-  }
   .videoCard:hover .videoImg {
     transform: none;
   }

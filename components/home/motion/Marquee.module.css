@@ -1,0 +1,31 @@
+.marquee {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(0.5rem, 2vw, 1.5rem);
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+}
+
+.track {
+  display: flex;
+  flex: none;
+  width: max-content;
+  white-space: nowrap;
+  font-family: var(--display);
+  text-transform: uppercase;
+  line-height: 0.82;
+  font-size: clamp(3.5rem, 13vw, 11rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(20, 22, 24, 0.1);
+  text-stroke: 1px rgba(20, 22, 24, 0.1);
+}
+
+.track span {
+  display: inline-block;
+  padding-inline: 0.15em;
+}

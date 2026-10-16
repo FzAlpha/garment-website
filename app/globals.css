@@ -587,84 +587,96 @@ textarea:focus {
   text-stroke-color: rgba(255, 255, 255, 0.12);
 }
 
-/* ── Scroll-driven animations (scrubbed to scroll position, as in the video) ──
-   Uses the CSS `view()` timeline. Where unsupported, elements simply render in
-   their final state (the keyframes only apply inside @supports), so nothing is
-   ever stuck hidden. Keyframes live outside @supports (harmless on their own). */
+/* ── GSAP slide-deck motion (homepage) ───────────────────────────────────────
+   Motion is driven by GSAP (see components/home/motion). The `.reveal-ready`
+   class is added before first paint ONLY when motion is allowed (see layout.tsx
+   revealGate), so these pre-hide rules prevent a flash before GSAP takes over,
+   while reduced-motion / no-JS keep everything visible. */
 
-@keyframes a-scale {
-  from {
-    transform: scale(0.52);
-    opacity: 0.25;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-@keyframes a-rise {
-  from {
-    transform: translateY(2.75rem);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-@keyframes a-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes a-drift-l {
-  from {
-    transform: translateX(5rem);
-  }
-  to {
-    transform: translateX(-5rem);
-  }
-}
-@keyframes a-drift-r {
-  from {
-    transform: translateX(-5rem);
-  }
-  to {
-    transform: translateX(5rem);
-  }
+.reveal-ready [data-anim="rise"],
+.reveal-ready [data-anim="fade"],
+.reveal-ready [data-anim="pop"],
+.reveal-ready [data-hero-word],
+.reveal-ready [data-hero-float],
+.reveal-ready [data-hero-nav],
+.reveal-ready [data-hero-fig],
+.reveal-ready [data-ghost],
+.reveal-ready [data-split] [data-char] {
+  opacity: 0;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  @supports (animation-timeline: view()) {
-    [data-anim] {
-      animation-timeline: view();
-      animation-fill-mode: both;
-      animation-timing-function: linear;
-    }
-    [data-anim="scale"] {
-      animation-name: a-scale;
-      animation-range: entry 0% cover 42%;
-    }
-    [data-anim="rise"] {
-      animation-name: a-rise;
-      animation-range: entry 8% cover 32%;
-    }
-    [data-anim="fade"] {
-      animation-name: a-fade;
-      animation-range: entry 0% cover 22%;
-    }
-    [data-anim="drift-l"] {
-      animation-name: a-drift-l;
-      animation-range: cover 0% cover 100%;
-    }
-    [data-anim="drift-r"] {
-      animation-name: a-drift-r;
-      animation-range: cover 0% cover 100%;
-    }
-  }
+/* Split-heading spans: words stay intact, characters animate individually. */
+[data-split] {
+  display: block;
+}
+.splitWord {
+  display: inline-block;
+  white-space: nowrap;
+}
+.splitChar {
+  display: inline-block;
+  will-change: transform;
+}
+
+/* ── Full-page slide deck ─────────────────────────────────────────────────────
+   `.deck-engaged` is added by the Deck controller ONLY after it mounts with
+   motion allowed. Until then (and under reduced motion / no-JS) sections stay in
+   normal document flow and scroll natively — never a hard scroll-lock. */
+
+.deck-root {
+  position: relative;
+}
+.deck-engaged {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--ivory);
+  z-index: 1;
+}
+html:has(.deck-engaged),
+body:has(.deck-engaged) {
+  overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+}
+.deck-engaged .deck-slide {
+  position: absolute;
+  inset: 0;
+  height: 100svh;
+  padding: clamp(0.6rem, 1.6vw, 1.1rem);
+  will-change: transform;
+}
+/* Each section fills its slide and centres its content inside the rounded frame. */
+.deck-engaged [data-fit] {
+  height: 100%;
+  margin: 0 !important;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.deck-engaged [data-fit="hero"] {
+  padding: 0;
+}
+.deck-engaged [data-hero-panel] {
+  height: 100%;
+  min-height: 0;
+  width: 100%;
+  padding-top: clamp(4.5rem, 7vw, 6rem);
+  padding-bottom: clamp(0.75rem, 2vw, 1.25rem);
+}
+.deck-engaged [data-hero-fig] {
+  height: 60%;
+}
+.deck-engaged [data-hero-bottom] {
+  padding-top: clamp(3.5rem, 12vw, 8rem);
+}
+/* Product grid condenses so all 8 cards fit one screen. */
+.deck-engaged [data-grid] {
+  gap: clamp(0.5rem, 1.2vw, 0.9rem);
+}
+.deck-engaged [data-grid] [data-anim="rise"] {
+  aspect-ratio: 4 / 3;
 }
 
 /* ── Reduced motion ──────────────────────────────────────────────────────── */

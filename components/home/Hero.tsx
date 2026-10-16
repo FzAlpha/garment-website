@@ -1,7 +1,11 @@
+"use client";
+
+import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { brand } from "@/lib/tokens";
 import styles from "./Hero.module.css";
+import { useEnter } from "./motion/deck/useEnter";
 
 const leftNav = [
   { label: "Shop", href: "/products" },
@@ -14,12 +18,32 @@ const rightNav = [
   { label: "Accessories", href: "/products" },
 ];
 
+// Headline split into words; "Workout!" keeps the outlined <em> treatment.
+const titleLines: { text: string; em?: boolean }[][] = [
+  [{ text: "Gear" }, { text: "Up" }, { text: "Every" }, { text: "Season" }],
+  [{ text: "Every" }, { text: "Workout!", em: true }],
+];
+
 export default function Hero() {
+  const root = useRef<HTMLElement>(null);
+
+  useEnter(root, (tl, r) => {
+    const q = (s: string) => r.querySelectorAll(s);
+    // 1 — model scales down from 1.45 and settles at bottom-centre.
+    tl.fromTo(q("[data-hero-fig]"), { scale: 1.45, opacity: 0 }, { scale: 1, opacity: 1, duration: 1.2 }, 0);
+    // Nav fades with the model.
+    tl.fromTo(q("[data-hero-nav]"), { opacity: 0 }, { opacity: 1, duration: 0.8 }, 0.1);
+    // 2 — headline reveals behind the shrinking model (typewriter stagger).
+    tl.fromTo(q("[data-hero-word]"), { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: 0.5, stagger: 0.07 }, 0.35);
+    // 3 — floating UI slides up once the model has settled.
+    tl.fromTo(q("[data-hero-float]"), { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.7, stagger: 0.12 }, 1.0);
+  });
+
   return (
-    <section className={styles.hero}>
-      <div className={styles.panel}>
-        {/* Notched nav band (scrolls away with the hero, as in the reference) */}
-        <div className={styles.navWrap}>
+    <section className={styles.hero} data-fit="hero" ref={root}>
+      <div className={styles.panel} data-hero-panel>
+        {/* Notched nav band inside the hero panel, as in the reference */}
+        <div className={styles.navWrap} data-hero-nav>
           <span className={styles.navBand} aria-hidden="true" />
           <nav className={styles.navBar} aria-label="Primary">
             <div className={`${styles.navGroup} ${styles.navLeft}`}>
@@ -56,12 +80,23 @@ export default function Hero() {
         <span className={styles.rays} aria-hidden="true" />
 
         <div className={styles.top}>
-          <h1 className={styles.title}>
-            Gear Up Every Season
-            <br />
-            Every <em>Workout!</em>
+          <h1 className={styles.title} aria-label="Gear Up Every Season Every Workout!">
+            {titleLines.map((line, li) => (
+              <span className={styles.titleLine} key={li} aria-hidden="true">
+                {line.map((word, wi) => (
+                  <span
+                    key={wi}
+                    className={word.em ? styles.titleEm : undefined}
+                    data-hero-word
+                  >
+                    {word.text}
+                    {wi < line.length - 1 ? " " : ""}
+                  </span>
+                ))}
+              </span>
+            ))}
           </h1>
-          <div className={styles.actions}>
+          <div className={styles.actions} data-hero-float>
             <Link href="/products" className="btn">
               Shop Now
             </Link>
@@ -71,7 +106,7 @@ export default function Hero() {
           </div>
         </div>
 
-        <div className={styles.figure} aria-hidden="true">
+        <div className={styles.figure} aria-hidden="true" data-hero-fig>
           <Image
             src="/images/hero-factory.jpg"
             alt=""
@@ -82,8 +117,8 @@ export default function Hero() {
           />
         </div>
 
-        <div className={styles.bottom}>
-          <div className={styles.intro}>
+        <div className={styles.bottom} data-hero-bottom>
+          <div className={styles.intro} data-hero-float>
             <div className={styles.dots} aria-hidden="true">
               <span />
               <span />
@@ -95,7 +130,7 @@ export default function Hero() {
             </p>
           </div>
 
-          <Link href="/manufacturing" className={styles.videoCard} aria-label="Watch">
+          <Link href="/manufacturing" className={styles.videoCard} aria-label="Watch" data-hero-float>
             <Image
               src="/images/hero-factory.jpg"
               alt=""
