@@ -9,20 +9,20 @@ import styles from "./Hero.module.css";
 import { useEnter } from "./motion/deck/useEnter";
 
 const leftNav = [
-  { label: "Shop", href: "/products" },
-  { label: "Men", href: "/garments/mens" },
-  { label: "Women", href: "/garments/womens" },
-  { label: "Trending", href: "/uniforms" },
+  { label: "Garments", href: "/garments" },
+  { label: "Uniforms", href: "/uniforms" },
+  { label: "Industries", href: "/industries" },
+  { label: "About", href: "/about" },
 ];
 const rightNav = [
-  { label: "Seasonal", href: "/uniforms" },
-  { label: "Accessories", href: "/products" },
+  { label: "Manufacturing", href: "/manufacturing" },
+  { label: "Contact", href: "/contact" },
 ];
 
-// Headline split into words; "Workout!" keeps the outlined <em> treatment.
+// Headline split into words; "Workforce!" keeps the outlined <em> treatment.
 const titleLines: { text: string; em?: boolean }[][] = [
-  [{ text: "Gear" }, { text: "Up" }, { text: "Every" }, { text: "Season" }],
-  [{ text: "Every" }, { text: "Workout!", em: true }],
+  [{ text: "Garments" }, { text: "Built" }, { text: "For" }],
+  [{ text: "Every" }, { text: "Workforce!", em: true }],
 ];
 
 export default function Hero() {
@@ -66,7 +66,7 @@ export default function Hero() {
                 </Link>
               ))}
               <Link href="/quote" className={styles.signPill}>
-                Sign In / Up
+                Get a Quote
               </Link>
               <Link href="/quote" className={styles.iconBtn} aria-label="Cart">
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.8">
@@ -81,7 +81,7 @@ export default function Hero() {
         <span className={styles.rays} aria-hidden="true" />
 
         <div className={styles.top}>
-          <h1 className={styles.title} aria-label="Gear Up Every Season Every Workout!">
+          <h1 className={styles.title} aria-label="Garments Built For Every Workforce!">
             {titleLines.map((line, li) => (
               <span className={styles.titleLine} key={li} aria-hidden="true">
                 {line.map((word, wi) => (
@@ -98,11 +98,11 @@ export default function Hero() {
             ))}
           </h1>
           <div className={styles.actions} data-hero-float>
-            <Link href="/products" className="btn">
-              Shop Now
+            <Link href="/garments" className="btn">
+              View Garments
             </Link>
-            <Link href="/uniforms" className="btn btn-gold">
-              Explore All
+            <Link href="/quote" className="btn btn-gold">
+              Request a Quote
             </Link>
           </div>
         </div>
@@ -126,8 +126,9 @@ export default function Hero() {
               <span />
             </div>
             <p>
-              Stay cozy without compromising your range of motion. Our women&apos;s
-              winter range is perfect for those chilly outdoor workouts.
+              From security and healthcare uniforms to corporate formalwear and
+              bulk apparel — manufactured to your specification, at any volume,
+              with export-grade quality.
             </p>
           </div>
 

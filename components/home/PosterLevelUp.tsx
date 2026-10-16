@@ -20,8 +20,8 @@ export default function PosterLevelUp() {
     <section className={styles.wrap} data-fit="panel" ref={root}>
       <Marquee
         rows={[
-          { text: "Fresh Fits For Your", dir: 1, speed: 30 },
-          { text: "Your Next Workout", dir: -1, speed: 34 },
+          { text: "Garment Manufacturing", dir: 1, speed: 30 },
+          { text: "Uniform Solutions", dir: -1, speed: 34 },
         ]}
       />
       <div className={styles.inner}>
@@ -33,8 +33,8 @@ export default function PosterLevelUp() {
           />
           <div className={styles.meta}>
             <span className={styles.brandTag}>{brand.name}</span>
-            <span className={styles.kicker}>Level Up</span>
-            <h2>With The Latest In Workout Wear</h2>
+            <span className={styles.kicker}>End To End</span>
+            <h2>From Tech Pack To Dispatch</h2>
           </div>
         </Reveal>
       </div>

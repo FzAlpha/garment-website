@@ -22,15 +22,15 @@ export default function ShowcaseTriptych() {
   return (
     <section className={styles.wrap} data-fit="panel" ref={root}>
       <span className={styles.ghost} aria-hidden="true" data-ghost>
-        Workout
+        Garments
       </span>
       <div className={styles.inner}>
         <div className={styles.triptych}>
           <div className={styles.triLeft}>
             <SlatReveal img={bg(home.triptych[0], 700)} className={styles.photo} />
             <Reveal as="p" variant="rise" className={styles.copy}>
-              Performance-driven gear for men—built for summer heat and winter
-              cold.
+              Specification-accurate garments — cut, stitched and finished under
+              one roof in India.
             </Reveal>
           </div>
 
@@ -40,8 +40,8 @@ export default function ShowcaseTriptych() {
 
           <div className={styles.triRight}>
             <Reveal as="p" variant="rise" className={styles.copy}>
-              Stay warm, stay fit. Our winter workout wear blends insulation with
-              flexibility to keep you going in the toughest conditions
+              From institutional uniforms to premium knits, every order is built
+              to your tech pack with consistent quality at scale.
             </Reveal>
             <SlatReveal img={bg(home.triptych[2], 700)} className={styles.photo} />
           </div>

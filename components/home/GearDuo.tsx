@@ -23,30 +23,30 @@ export default function GearDuo() {
     <section className={styles.wrap} data-fit="panel" ref={root}>
       <div className={styles.inner}>
         <div className={styles.duoHead}>
-          <SplitHeading as="h2" text="Top Workout Gear For Peak Performance!" />
+          <SplitHeading as="h2" text="Garments Engineered For Every Sector!" />
           <Reveal as="p" variant="fade">
-            Discover the best of our collection, designed to power your workouts
-            all year round
+            Explore our core manufacturing lines — built for institutions,
+            corporates and brands across India and beyond.
           </Reveal>
         </div>
 
         <div className={styles.duo}>
-          <Link href="/products" className={styles.bigCard}>
+          <Link href="/uniforms" className={styles.bigCard}>
             <SlatReveal img={bg(home.duo[0], 800)} className={styles.cardMedia}>
               <div className={styles.cardInner}>
-                <span className={styles.index}>01 / Winter _2025</span>
-                <h3>Top Workout Gear For Peak Performance!</h3>
-                <span className={styles.pill}>Top Selling Gear</span>
+                <span className={styles.index}>01 / Uniforms</span>
+                <h3>Institutional &amp; Corporate Uniform Programs</h3>
+                <span className={styles.pill}>Uniform Solutions</span>
               </div>
             </SlatReveal>
           </Link>
 
-          <Link href="/products" className={styles.bigCard}>
+          <Link href="/garments" className={styles.bigCard}>
             <SlatReveal img={bg(home.duo[1], 800)} className={styles.cardMedia}>
               <div className={styles.cardInner}>
-                <span className={styles.index}>02 / Summer _2025</span>
-                <h3>Latest Styles And Innovations In Workout Gear!</h3>
-                <span className={styles.pill}>New Arrival</span>
+                <span className={styles.index}>02 / Garments</span>
+                <h3>Premium Formals, Knits &amp; Custom Apparel</h3>
+                <span className={styles.pill}>Garment Ranges</span>
               </div>
             </SlatReveal>
           </Link>

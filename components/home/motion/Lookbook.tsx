@@ -12,10 +12,10 @@ import Marquee from "./Marquee";
 import styles from "./Lookbook.module.css";
 
 const OUTFITS = [
-  { tag: "Liner Short & Inner Thermal", meta: "Fall / Winter 2024", img: home.lookbook[0] },
-  { tag: "Compression Base Layer", meta: "All-Season Training", img: home.lookbook[1] },
-  { tag: "Shell & Wind Jacket", meta: "Cold Weather Kit", img: home.lookbook[2] },
-  { tag: "Performance Tee & Short", meta: "Summer 2025", img: home.lookbook[3] },
+  { tag: "Security & Protective Uniforms", meta: "Institutional Programs", img: home.lookbook[0] },
+  { tag: "Corporate & Executive Formalwear", meta: "Business Apparel", img: home.lookbook[1] },
+  { tag: "Healthcare & Hospitality Wear", meta: "Service Sectors", img: home.lookbook[2] },
+  { tag: "Custom Knits & Textiles", meta: "Made To Specification", img: home.lookbook[3] },
 ];
 
 export default function Lookbook() {
@@ -41,8 +41,8 @@ export default function Lookbook() {
     <section ref={root} className={styles.section} data-fit="panel">
       <Marquee
         rows={[
-          { text: "Fresh Fits For Your", dir: 1, speed: 30 },
-          { text: "Your Next Workout", dir: -1, speed: 34 },
+          { text: "Garment Manufacturing", dir: 1, speed: 30 },
+          { text: "Uniform Solutions", dir: -1, speed: 34 },
         ]}
       />
       <div className={styles.inner}>
