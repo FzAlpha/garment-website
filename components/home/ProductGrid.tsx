@@ -7,6 +7,7 @@ import SplitHeading from "./motion/SplitHeading";
 import Reveal from "./motion/Reveal";
 import { useEnter } from "./motion/deck/useEnter";
 import { addSplit, addAnim } from "./motion/deck/enterHelpers";
+import { bg, home } from "@/lib/media";
 
 const Arrow = () => (
   <svg className={styles.arrow} viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2">
@@ -55,13 +56,21 @@ export default function ProductGrid() {
         <div className={styles.grid} data-grid>
           {row1.map((i) => (
             <Link key={i} href="/products" className={styles.product} data-anim="rise">
-              <span className={styles.media} aria-hidden="true" />
+              <span
+                className={styles.media}
+                aria-hidden="true"
+                style={{ backgroundImage: bg(home.products[i], 500) }}
+              />
               <Label />
             </Link>
           ))}
           {row2.map((i) => (
             <Link key={i} href="/products" className={styles.product} data-anim="rise">
-              <span className={styles.media} aria-hidden="true" />
+              <span
+                className={styles.media}
+                aria-hidden="true"
+                style={{ backgroundImage: bg(home.products[i], 500) }}
+              />
               <span className={styles.tag}>
                 <span className={styles.pill}>Winter</span>
                 <Heart />

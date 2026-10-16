@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import Icon from "@/components/ui/Icon";
 import { industries } from "@/data/industries";
 import styles from "./industries.module.css";
@@ -19,6 +20,7 @@ export default function IndustriesPage() {
         title="One Manufacturing Partner for Every Sector"
         subtitle="From classrooms to construction sites, we outfit the teams that keep organizations running — with uniforms and garments built for the demands of each industry."
         crumbs={[{ label: "Home", href: "/" }, { label: "Industries" }]}
+      image={banners.industries}
       />
 
       <section className="section">

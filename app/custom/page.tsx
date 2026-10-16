@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import Icon from "@/components/ui/Icon";
 import { customServices, customInputs } from "@/data/capabilities";
 import styles from "./custom.module.css";
@@ -26,6 +27,7 @@ export default function CustomPage() {
         title="Designed to Your Requirements, Manufactured to Your Specifications"
         subtitle="Approach us with your own design, fabric, colour, logo, measurements, size chart, quantity and specification — and we develop and manufacture accordingly."
         crumbs={[{ label: "Home", href: "/" }, { label: "Custom Design" }]}
+      image={banners.custom}
       />
 
       <section className="section">

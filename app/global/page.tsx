@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import Icon from "@/components/ui/Icon";
 import { globalAudiences } from "@/data/capabilities";
 import { company } from "@/lib/company";
@@ -20,6 +21,7 @@ export default function GlobalPage() {
         title="Made in India. Customized for You. Supplied Worldwide."
         subtitle="Our manufacturing unit is based in India, while our vision is to serve customers across India and international markets."
         crumbs={[{ label: "Home", href: "/" }, { label: "Global Supply" }]}
+      image={banners.global}
       />
 
       <section className="section">

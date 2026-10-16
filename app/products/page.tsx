@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import FlagshipShowcase from "@/components/home/FlagshipShowcase";
 import ProductCard from "@/components/catalog/ProductCard";
 import { getFeaturedProducts } from "@/data/products";
@@ -19,6 +20,7 @@ export default function ProductsPage() {
         title="Products & Manufacturing Lines"
         subtitle="Three specialised collections, each built around dedicated fabric programmes, sizing and finishing. Browse a category to see detailed specs and request a quote."
         crumbs={[{ label: "Home", href: "/" }, { label: "Products" }]}
+      image={banners.products}
       />
 
       <FlagshipShowcase />

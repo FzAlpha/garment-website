@@ -4,6 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { brand } from "@/lib/tokens";
+import { home, img } from "@/lib/media";
 import styles from "./Hero.module.css";
 import { useEnter } from "./motion/deck/useEnter";
 
@@ -108,7 +109,7 @@ export default function Hero() {
 
         <div className={styles.figure} aria-hidden="true" data-hero-fig>
           <Image
-            src="/images/hero-factory.jpg"
+            src={home.hero}
             alt=""
             fill
             priority
@@ -132,7 +133,7 @@ export default function Hero() {
 
           <Link href="/manufacturing" className={styles.videoCard} aria-label="Watch" data-hero-float>
             <Image
-              src="/images/hero-factory.jpg"
+              src={img(home.products[0], 500)}
               alt=""
               fill
               sizes="(max-width: 48rem) 60vw, 22rem"

@@ -7,8 +7,7 @@ import Reveal from "./motion/Reveal";
 import { useEnter } from "./motion/deck/useEnter";
 import { addSlats, addAnim } from "./motion/deck/enterHelpers";
 import { EASE } from "./motion/gsapSetup";
-
-const GRAD = "linear-gradient(160deg,#44484c 0%,#202326 55%,#0f1113 100%)";
+import { bg, home } from "@/lib/media";
 
 export default function ShowcaseTriptych() {
   const root = useRef<HTMLElement>(null);
@@ -28,7 +27,7 @@ export default function ShowcaseTriptych() {
       <div className={styles.inner}>
         <div className={styles.triptych}>
           <div className={styles.triLeft}>
-            <SlatReveal img={GRAD} className={styles.photo} />
+            <SlatReveal img={bg(home.triptych[0], 700)} className={styles.photo} />
             <Reveal as="p" variant="rise" className={styles.copy}>
               Performance-driven gear for men—built for summer heat and winter
               cold.
@@ -36,7 +35,7 @@ export default function ShowcaseTriptych() {
           </div>
 
           <div className={styles.triCenter}>
-            <SlatReveal img={GRAD} className={styles.photo} />
+            <SlatReveal img={bg(home.triptych[1], 800)} className={styles.photo} />
           </div>
 
           <div className={styles.triRight}>
@@ -44,7 +43,7 @@ export default function ShowcaseTriptych() {
               Stay warm, stay fit. Our winter workout wear blends insulation with
               flexibility to keep you going in the toughest conditions
             </Reveal>
-            <SlatReveal img={GRAD} className={styles.photo} />
+            <SlatReveal img={bg(home.triptych[2], 700)} className={styles.photo} />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import Icon from "@/components/ui/Icon";
 import { uniformSectors } from "@/data/uniforms";
 import styles from "./uniforms.module.css";
@@ -19,6 +20,7 @@ export default function UniformsPage() {
         title="Customized Uniforms for Every Sector"
         subtitle="Our core focus — complete, brand-aligned uniform programmes manufactured to your specifications for institutions, companies and organizations, in India and internationally."
         crumbs={[{ label: "Home", href: "/" }, { label: "Uniform Solutions" }]}
+      image={banners.uniforms}
       />
 
       <section className="section">

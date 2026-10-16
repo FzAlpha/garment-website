@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -31,6 +32,7 @@ export default function AboutPage() {
         title="Precision Garment Manufacturing, Engineered in India"
         subtitle="We produce durable, specification-accurate uniforms and apparel for institutions and brands across India and international markets."
         crumbs={[{ label: "Home", href: "/" }, { label: "About Us" }]}
+        image={banners.about}
       />
 
       <section className="section">

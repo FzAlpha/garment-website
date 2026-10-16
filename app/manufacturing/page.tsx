@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import Icon from "@/components/ui/Icon";
 import { machines, factoryWorkflow, plantMetrics } from "@/data/machinery";
 import { productionScales } from "@/data/capabilities";
@@ -21,6 +22,7 @@ export default function ManufacturingPage() {
         title="Manufacturing Capabilities & Advanced Machinery"
         subtitle="A vertically integrated plant — from CAD pattern-making and precision cutting to computerized stitching lines and export-ready finishing."
         crumbs={[{ label: "Home", href: "/" }, { label: "Manufacturing" }]}
+      image={banners.manufacturing}
       />
 
       {/* Machinery gallery */}

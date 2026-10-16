@@ -243,12 +243,18 @@ img {
 .section {
   padding-block: clamp(3.5rem, 8vw, 6rem);
 }
+/* Tinted / dark sections become rounded floating panels on the canvas, echoing
+   the homepage deck. */
 .section-tint {
-  background: var(--sand);
+  background: linear-gradient(172deg, var(--panel-a) 0%, #dbe4e5 60%, #d0dbdd 100%);
+  margin-inline: clamp(0.75rem, 2vw, 1.25rem);
+  border-radius: clamp(1.5rem, 3vw, 2.5rem);
 }
 .section-dark {
-  background: var(--maroon-deep);
+  background: linear-gradient(158deg, #24282b 0%, #16191b 55%, #0c0e10 100%);
   color: var(--ivory);
+  margin-inline: clamp(0.75rem, 2vw, 1.25rem);
+  border-radius: clamp(1.5rem, 3vw, 2.5rem);
 }
 .section-dark .eyebrow {
   color: var(--gold-soft);

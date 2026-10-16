@@ -7,14 +7,15 @@
 import { useEffect, useRef } from "react";
 import { gsap, EASE } from "./gsapSetup";
 import { useSlide } from "./deck/SlideContext";
+import { bg, home } from "@/lib/media";
 import Marquee from "./Marquee";
 import styles from "./Lookbook.module.css";
 
 const OUTFITS = [
-  { tag: "Liner Short & Inner Thermal", meta: "Fall / Winter 2024" },
-  { tag: "Compression Base Layer", meta: "All-Season Training" },
-  { tag: "Shell & Wind Jacket", meta: "Cold Weather Kit" },
-  { tag: "Performance Tee & Short", meta: "Summer 2025" },
+  { tag: "Liner Short & Inner Thermal", meta: "Fall / Winter 2024", img: home.lookbook[0] },
+  { tag: "Compression Base Layer", meta: "All-Season Training", img: home.lookbook[1] },
+  { tag: "Shell & Wind Jacket", meta: "Cold Weather Kit", img: home.lookbook[2] },
+  { tag: "Performance Tee & Short", meta: "Summer 2025", img: home.lookbook[3] },
 ];
 
 export default function Lookbook() {
@@ -47,7 +48,12 @@ export default function Lookbook() {
       <div className={styles.inner}>
         <div className={styles.card}>
           {OUTFITS.map((o, i) => (
-            <div key={i} className={styles.outfit} data-outfit={i}>
+            <div
+              key={i}
+              className={styles.outfit}
+              data-outfit={i}
+              style={{ backgroundImage: bg(o.img, 700) }}
+            >
               <div className={styles.meta}>
                 <span className={styles.kicker}>{o.tag}</span>
                 <div className={styles.rows}>

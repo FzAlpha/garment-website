@@ -1,18 +1,70 @@
+/* Rounded image hero panel — the internal-page echo of the homepage panels. */
 .banner {
-  background: var(--sand);
-  border-bottom: 1px solid var(--line);
-  padding-block: calc(var(--header-h) + 2.5rem) 2.5rem;
+  padding: calc(var(--header-h) + clamp(0.75rem, 2vw, 1.25rem))
+    clamp(0.75rem, 2vw, 1.25rem) 0;
 }
+
+.panel {
+  position: relative;
+  overflow: hidden;
+  border-radius: clamp(1.5rem, 3vw, 2.5rem);
+  min-height: clamp(18rem, 42vw, 27rem);
+  display: flex;
+  align-items: flex-end;
+  padding-block: clamp(2rem, 5vw, 3.5rem);
+  isolation: isolate;
+}
+
+.img {
+  object-fit: cover;
+  object-position: center;
+  filter: grayscale(1) contrast(1.04) brightness(0.72);
+  z-index: -2;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 13, 15, 0.45) 0%,
+    rgba(10, 13, 15, 0.3) 40%,
+    rgba(10, 13, 15, 0.82) 100%
+  );
+}
+
 .inner {
   display: grid;
   gap: 0.9rem;
-  max-width: 48rem;
+  max-width: 52rem;
+  color: #eef2f3;
+}
+.eyebrow {
+  color: var(--gold-soft);
+  margin-bottom: 0;
 }
 .title {
-  font-size: clamp(2rem, 4.5vw, 3rem);
-  color: var(--maroon);
+  font-size: clamp(2.2rem, 5.5vw, 4rem);
+  color: #f4f7f8;
 }
 .subtitle {
-  color: var(--muted);
-  font-size: 1.1rem;
+  color: rgba(238, 242, 243, 0.82);
+  font-size: clamp(1rem, 1.6vw, 1.15rem);
+  max-width: 44rem;
+}
+
+/* Breadcrumbs over the dark image. */
+.inner :global(.breadcrumbs),
+.inner :global(.breadcrumbs a) {
+  color: rgba(238, 242, 243, 0.72);
+}
+.inner :global(.breadcrumbs a:hover) {
+  color: #fff;
+}
+.inner :global(.breadcrumbs li[aria-current="page"]) {
+  color: #fff;
+}
+.inner :global(.breadcrumbs li::after) {
+  color: rgba(238, 242, 243, 0.4);
 }

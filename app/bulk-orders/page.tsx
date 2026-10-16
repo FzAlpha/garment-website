@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import Icon from "@/components/ui/Icon";
 import { productionScales, bulkClients } from "@/data/capabilities";
 import styles from "./bulk.module.css";
@@ -19,6 +20,7 @@ export default function BulkOrdersPage() {
         title="Bulk Manufacturing, Built Around Your Order"
         subtitle="From pilot runs to high-volume production, we manufacture customized uniforms and garments for organizations of every size — with dependable lead times and consistent quality."
         crumbs={[{ label: "Home", href: "/" }, { label: "Bulk Orders" }]}
+      image={banners.bulk}
       />
 
       <section className="section">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import Icon from "@/components/ui/Icon";
 import { garmentRanges } from "@/data/ranges";
 import { categories } from "@/lib/navigation";
@@ -20,6 +21,7 @@ export default function GarmentsPage() {
         title="Garments We Manufacture"
         subtitle="Beyond uniforms, we manufacture a broad range of men's, women's, ethnic and textile products — all customizable to your design, fabric and branding."
         crumbs={[{ label: "Home", href: "/" }, { label: "Garments" }]}
+      image={banners.garments}
       />
 
       <section className="section">

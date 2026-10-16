@@ -8,8 +8,7 @@ import SplitHeading from "./motion/SplitHeading";
 import Reveal from "./motion/Reveal";
 import { useEnter } from "./motion/deck/useEnter";
 import { addSplit, addAnim, addSlats } from "./motion/deck/enterHelpers";
-
-const CARD_GRAD = "linear-gradient(150deg,#3c4042 0%,#1c1f22 60%,#0c0e10 100%)";
+import { bg, home } from "@/lib/media";
 
 export default function GearDuo() {
   const root = useRef<HTMLElement>(null);
@@ -33,7 +32,7 @@ export default function GearDuo() {
 
         <div className={styles.duo}>
           <Link href="/products" className={styles.bigCard}>
-            <SlatReveal img={CARD_GRAD} className={styles.cardMedia}>
+            <SlatReveal img={bg(home.duo[0], 800)} className={styles.cardMedia}>
               <div className={styles.cardInner}>
                 <span className={styles.index}>01 / Winter _2025</span>
                 <h3>Top Workout Gear For Peak Performance!</h3>
@@ -43,7 +42,7 @@ export default function GearDuo() {
           </Link>
 
           <Link href="/products" className={styles.bigCard}>
-            <SlatReveal img={CARD_GRAD} className={styles.cardMedia}>
+            <SlatReveal img={bg(home.duo[1], 800)} className={styles.cardMedia}>
               <div className={styles.cardInner}>
                 <span className={styles.index}>02 / Summer _2025</span>
                 <h3>Latest Styles And Innovations In Workout Gear!</h3>

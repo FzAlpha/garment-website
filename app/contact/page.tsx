@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import PageBanner from "@/components/ui/PageBanner";
+import { banners } from "@/lib/media";
 import ContactForm from "@/components/contact/ContactForm";
 import { company, mailtoLink, telLink, telLinkAlt, whatsappLink } from "@/lib/company";
 
@@ -30,6 +31,7 @@ export default function ContactPage() {
         title="Talk to the Prolink Team"
         subtitle="For bulk garment and uniform enquiries, reach us directly or send a message — we typically respond within one business day."
         crumbs={[{ label: "Home", href: "/" }, { label: "Contact" }]}
+      image={banners.contact}
       />
 
       <section className="section">
