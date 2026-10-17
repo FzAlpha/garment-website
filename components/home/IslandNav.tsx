@@ -7,6 +7,7 @@
 import Link from "next/link";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { brand } from "@/lib/tokens";
+import ProlinkWordmark from "@/components/ui/ProlinkWordmark";
 import styles from "./IslandNav.module.css";
 
 const navItems = [
@@ -46,7 +47,7 @@ export default function IslandNav({ hidden = false }: { hidden?: boolean }) {
     >
       <div className={styles.island} tabIndex={0}>
         <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
-          {brand.name}
+          <ProlinkWordmark height={20} />
         </Link>
         <nav ref={linksRef} className={styles.links} aria-label="Primary">
           {navItems.map((n) => (

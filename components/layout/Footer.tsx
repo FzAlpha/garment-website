@@ -21,6 +21,19 @@ export default function Footer({ showOnHome = false }: { showOnHome?: boolean })
         showOnHome ? styles.deckSlide : ""
       }`}
     >
+      {showOnHome && (
+        <div className={styles.lead}>
+          <h2 className={styles.leadTitle}>Let&apos;s outfit your workforce.</h2>
+          <p className={styles.leadText}>
+            Security, healthcare, corporate and bulk apparel — manufactured to
+            your specification, at any volume, with export-grade quality.
+          </p>
+          <Link href="/quote" className={styles.leadCta}>
+            Request a Quote
+          </Link>
+        </div>
+      )}
+
       <div className={styles.inner}>
         <div className={styles.grid}>
           <nav aria-label="Solutions">

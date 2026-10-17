@@ -72,8 +72,20 @@
 .navLink:hover {
   opacity: 0.6;
 }
-.logo {
+/* Centre dock: holds the notch (link home) and the hover-reveal credentials
+   card. align-self:start keeps the notch hanging from the band's top edge. */
+.logoDock {
+  position: relative;
   align-self: start;
+  justify-self: center;
+  /* Reserve only the collapsed width so the expanding notch (absolutely
+     positioned below) never widens this grid column — otherwise growth pushes
+     the side nav links and overflows the row. */
+  width: var(--notch-w, 11rem);
+  height: clamp(4.5rem, 7vw, 6rem);
+  z-index: 8;
+}
+.logo {
   margin-top: 0; /* connect the notch to the top edge of the band */
   display: block;
   text-decoration: none;
@@ -83,20 +95,170 @@
 /* Centre notch: a dark tab that hangs from the very top edge with smoothly
    rounded bottom corners (iPhone-notch / tongue) — the docked form of the
    dynamic island while the hero is on screen. */
+/* Centre notch: a dark tab hanging from the band's top edge. It is the SAME
+   element that grows on hover — the tab itself widens and drops open into the
+   full credentials card (its docked, collapsed form is the PROLINK tab). */
 .logoNotch {
+  /* Overlays out of flow (anchored to the dock's top-centre) so expanding it
+     covers the band rather than reflowing the nav. */
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+  width: var(--notch-w, 11rem);
+  background: #15181b;
+  color: #fff;
+  padding: 1rem 1.6rem 1.1rem;
+  border-radius: 0 0 clamp(1rem, 1.8vw, 1.4rem) clamp(1rem, 1.8vw, 1.4rem);
+  overflow: hidden;
+  box-shadow: 0 24px 54px -30px rgba(8, 11, 13, 0.7);
+  transition:
+    width 0.52s cubic-bezier(0.2, 0.7, 0.2, 1),
+    padding 0.52s cubic-bezier(0.2, 0.7, 0.2, 1),
+    border-radius 0.52s ease;
+}
+/* The PROLINK wordmark — always visible; it stays as the card's header once the
+   notch has expanded. */
+.logoBrand {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #15181b;
   color: #fff;
-  padding: 1rem 2.1rem 1.1rem;
+  text-decoration: none;
+  line-height: 1;
+}
+/* Hover/focus: the tab itself expands into the wide rectangle. */
+.logoDock:hover .logoNotch,
+.logoDock:focus-within .logoNotch {
+  width: min(52rem, 90vw);
+  padding: 1.1rem clamp(1.3rem, 2.6vw, 2.1rem) clamp(1.2rem, 2.2vw, 1.7rem);
+  /* Round all four corners once open so the wider card reads as a clean
+     floating rectangle instead of sharp top shoulders. */
+  border-radius: clamp(1rem, 1.8vw, 1.4rem);
+}
+
+/* Credentials, revealed inside the expanding notch (clipped until open). */
+.logoDetails {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr 1.2fr;
+  gap: clamp(1rem, 2.4vw, 2.1rem);
+  text-align: left;
+  max-height: 0;
+  margin-top: 0;
+  opacity: 0;
+  transition:
+    max-height 0.52s cubic-bezier(0.2, 0.7, 0.2, 1),
+    margin-top 0.52s cubic-bezier(0.2, 0.7, 0.2, 1),
+    opacity 0.4s ease;
+}
+.logoDock:hover .logoDetails,
+.logoDock:focus-within .logoDetails {
+  max-height: 24rem;
+  margin-top: clamp(0.9rem, 1.8vw, 1.4rem);
+  opacity: 1;
+}
+.cardCol {
+  min-width: 0;
+}
+.cardCol + .cardCol {
+  padding-left: clamp(1rem, 2.4vw, 2.1rem);
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+.cardName {
   font-family: var(--sans);
   font-weight: 700;
-  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
-  letter-spacing: 0.22em;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  line-height: 1.25;
+}
+.cardTag {
+  margin-top: 0.4rem;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.72);
+}
+.cardTrust {
+  margin-top: 0.55rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  white-space: nowrap;
-  border-radius: 0 0 clamp(1rem, 1.8vw, 1.4rem) clamp(1rem, 1.8vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.5);
+}
+.cardColTitle {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 0.6rem;
+}
+.cardServices {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.34rem;
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+.cardServices li {
+  position: relative;
+  padding-left: 0.85rem;
+  color: rgba(255, 255, 255, 0.76);
+}
+.cardServices li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.55);
+}
+.cardFounderName {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 0.92rem;
+  color: #fff;
+  letter-spacing: 0.01em;
+}
+.cardFounderTitle {
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.55);
+  margin-top: 0.1rem;
+  margin-bottom: 0.7rem;
+}
+.cardContact {
+  display: grid;
+  gap: 0.3rem;
+  font-size: 0.76rem;
+  line-height: 1.4;
+}
+.cardContact a {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.cardContact a:hover {
+  color: #fff;
+  text-decoration: underline;
+}
+.cardRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 0.6rem;
+}
+.cardAddr {
+  margin-top: 0.15rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.45;
 }
 .signPill {
   display: inline-flex;
@@ -268,10 +430,21 @@
   .navBar {
     grid-template-columns: auto 1fr;
   }
-  .logo {
+  .logoDock {
     justify-self: start;
     align-self: center;
-    margin-top: 0;
+    /* Collapse the reserved footprint; the notch is a plain tab here. */
+    width: auto;
+    height: auto;
+  }
+  /* No hover on touch — keep the notch in flow as a plain home tab, and hide
+     the credentials card. */
+  .logoNotch {
+    position: static;
+    transform: none;
+  }
+  .logoDetails {
+    display: none;
   }
   .navRight {
     justify-self: end;

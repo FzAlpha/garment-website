@@ -32,13 +32,60 @@
   border-top-color: rgba(255, 255, 255, 0.14);
 }
 
-/* As the homepage deck's final slide, fill the slide height and sit the
-   content toward the bottom so it reads as a true footer panel. */
+/* As the homepage deck's final slide, fill the slide height and distribute the
+   content (CTA lead → columns → bottom bar) so it reads as a full footer panel
+   instead of everything piling up at the bottom. */
 .deckSlide {
   min-height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: space-between;
+  gap: clamp(2rem, 5vh, 4rem);
+  /* Top padding clears the floating island pill. */
+  padding-block: clamp(5.5rem, 12vh, 9rem) clamp(1rem, 2vh, 2rem);
+}
+
+/* Footer CTA lead — anchors the top of the deck-slide footer. */
+.lead {
+  width: min(80rem, 100% - 3rem);
+  margin-inline: auto;
+  text-align: center;
+}
+.leadTitle {
+  font-family: var(--display);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 0.95;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  color: var(--ivory);
+  margin: 0 auto;
+  max-width: 18ch;
+}
+.leadText {
+  margin: clamp(0.75rem, 2vh, 1.25rem) auto 0;
+  max-width: 44ch;
+  line-height: 1.6;
+  color: rgba(238, 241, 241, 0.62);
+}
+.leadCta {
+  display: inline-flex;
+  align-items: center;
+  margin-top: clamp(1.1rem, 2.5vh, 1.75rem);
+  background: var(--ivory);
+  color: #0c0d0e;
+  border-radius: 999px;
+  padding: 0.8rem 1.8rem;
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+.leadCta:hover {
+  background: #fff;
+  transform: translateY(-1px);
 }
 
 /* Centered content width — full-bleed spread the four columns too thin, so the

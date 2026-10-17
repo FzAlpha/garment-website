@@ -4,8 +4,10 @@ import { useRef } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { brand } from "@/lib/tokens";
+import { company, mailtoLink, telLink, telLinkAlt } from "@/lib/company";
 import { home, img } from "@/lib/media";
 import styles from "./Hero.module.css";
+import ProlinkWordmark from "@/components/ui/ProlinkWordmark";
 import { useEnter } from "./motion/deck/useEnter";
 
 const leftNav = [
@@ -17,6 +19,15 @@ const leftNav = [
 const rightNav = [
   { label: "Manufacturing", href: "/manufacturing" },
   { label: "Contact", href: "/contact" },
+];
+
+// Shown inside the notch's hover card (the business-card credentials panel).
+const cardServices = [
+  "Uniform Solutions",
+  "Custom Design & Branding",
+  "Bulk & Export Orders",
+  "Men's & Women's Wear",
+  "Textiles & Fabrics",
 ];
 
 // Headline split into words; "Workforce!" keeps the outlined <em> treatment.
@@ -67,9 +78,51 @@ export default function Hero() {
               ))}
             </div>
 
-            <Link href="/" className={styles.logo} aria-label={`${brand.name} home`}>
-              <span className={styles.logoNotch}>{brand.name}</span>
-            </Link>
+            {/* The notch itself expands: on hover the dark tab widens and drops
+                open into the business-card panel (name, what we do, founder and
+                contacts), keeping PROLINK as its header. */}
+            <div className={styles.logoDock}>
+              <div className={styles.logoNotch} role="group" aria-label={`${company.legalName} details`}>
+                <Link href="/" className={styles.logoBrand} aria-label={`${brand.name} home`}>
+                  <ProlinkWordmark height={26} />
+                </Link>
+
+                <div className={styles.logoDetails}>
+                  <div className={styles.cardCol}>
+                  <p className={styles.cardName}>{company.legalName}</p>
+                  <p className={styles.cardTag}>{company.tagline}</p>
+                  <p className={styles.cardTrust}>India&apos;s trusted manufacturing partner</p>
+                </div>
+
+                <div className={styles.cardCol}>
+                  <p className={styles.cardColTitle}>What We Do</p>
+                  <ul className={styles.cardServices}>
+                    {cardServices.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className={styles.cardCol}>
+                  <p className={styles.cardFounderName}>{company.founder}</p>
+                  <p className={styles.cardFounderTitle}>({company.founderTitle})</p>
+                  <div className={styles.cardContact}>
+                    <span className={styles.cardRow}>
+                      <a href={telLink}>{company.phone}</a>
+                      <a href={telLinkAlt}>{company.phoneAlt}</a>
+                    </span>
+                    <a href={mailtoLink}>{company.email}</a>
+                    <a href={company.website} target="_blank" rel="noopener noreferrer">
+                      {company.website.replace(/^https?:\/\//, "")}
+                    </a>
+                    <span className={styles.cardAddr}>
+                      {company.address.line1}, {company.address.line2}
+                    </span>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
 
             <div className={`${styles.navGroup} ${styles.navRight}`}>
               {rightNav.map((n) => (
