@@ -23,19 +23,35 @@ import { SlideContext } from "./SlideContext";
 const DURATION = 0.9;
 const COOLDOWN = 1000; // ms
 
-/** Inner steps per section (0 = none). The last section cycles 4 outfits → 3 advances. */
-const innerMaxFor = (index: number, count: number) => (index === count - 1 ? 3 : 0);
-
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
-export default function Deck({ children }: { children: ReactNode }) {
+export default function Deck({
+  children,
+  innerSteps,
+  onActive,
+}: {
+  children: ReactNode;
+  /** Inner-step count per slide index (0 = none). Defaults to 3 on the last
+   *  slide (the lookbook cycling 4 outfits). Pass an explicit map when a
+   *  terminal slide — e.g. the footer — should not cycle. */
+  innerSteps?: number[];
+  /** Notified with the active slide index whenever it changes. */
+  onActive?: (index: number) => void;
+}) {
   const slides = Children.toArray(children);
   const count = slides.length;
+
+  const innerMaxFor = (index: number) =>
+    innerSteps?.[index] ?? (index === count - 1 ? 3 : 0);
 
   const [active, setActive] = useState(0);
   const [inner, setInner] = useState(0);
   const [reduced, setReduced] = useState(false);
   const [engaged, setEngaged] = useState(false);
+
+  useEffect(() => {
+    onActive?.(active);
+  }, [active, onActive]);
 
   const activeRef = useRef(0);
   const innerRef = useRef(0);
@@ -97,7 +113,7 @@ export default function Deck({ children }: { children: ReactNode }) {
       if (animating.current) return;
       const a = activeRef.current;
       const i = innerRef.current;
-      const maxInner = innerMaxFor(a, count);
+      const maxInner = innerMaxFor(a);
       if (dir > 0) {
         if (i < maxInner) stepInner(i + 1);
         else if (a < count - 1) transition(a, a + 1, 1);

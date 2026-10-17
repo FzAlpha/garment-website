@@ -32,6 +32,15 @@
   border-top-color: rgba(255, 255, 255, 0.14);
 }
 
+/* As the homepage deck's final slide, fill the slide height and sit the
+   content toward the bottom so it reads as a true footer panel. */
+.deckSlide {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+
 /* Centered content width — full-bleed spread the four columns too thin, so the
    columns and the bottom row share one comfortable width and stay aligned. */
 .inner {
@@ -41,9 +50,20 @@
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  /* The four nav/contact columns sit on one line. */
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 2rem 3rem;
   align-items: start;
+}
+@media (max-width: 720px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 420px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .brandCol {

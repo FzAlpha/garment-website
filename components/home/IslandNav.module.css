@@ -1,0 +1,125 @@
+/* Fixed wrapper: keeps the island pinned top-centre through scroll / slides,
+   and carries the gentle float so the inner pill's expand transition is free. */
+.wrap {
+  position: fixed;
+  top: clamp(0.6rem, 1.5vw, 1rem);
+  left: 50%;
+  z-index: 100;
+  transform: translateX(-50%) translateY(0);
+  animation: islandFloat 4.5s ease-in-out infinite;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+.wrap:hover,
+.wrap:focus-within {
+  animation-play-state: paused;
+}
+
+/* Docked on slide 0: the hero's own top notch shows instead, so the floating
+   island fades out and stops intercepting clicks. */
+.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.island {
+  display: flex;
+  align-items: center;
+  max-width: 94vw;
+  overflow: hidden;
+  background: #15181b;
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.6rem 1.5rem;
+  box-shadow:
+    0 14px 30px -10px rgba(10, 13, 15, 0.6),
+    0 3px 8px -2px rgba(10, 13, 15, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  transition: padding 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+  cursor: pointer;
+}
+
+.brand {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* Collapsed by default (width 0, faded); expands on hover / focus. */
+.links {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.8rem, 1.6vw, 1.6rem);
+  max-width: 0;
+  margin-left: 0;
+  opacity: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  /* Symmetric ease-in-out so it glides open and closed instead of snapping.
+     The expanded max-width sits just above the real link row (~40rem) so the
+     whole duration maps to visible motion rather than an invisible overshoot. */
+  transition:
+    max-width 0.62s cubic-bezier(0.65, 0, 0.35, 1),
+    margin-left 0.62s cubic-bezier(0.65, 0, 0.35, 1),
+    opacity 0.5s ease-in-out;
+}
+.wrap:hover .links,
+.wrap:focus-within .links {
+  /* Exact measured row width (set by JS); the fallback is generous enough not
+     to clip before measurement / with JS off. */
+  max-width: var(--links-w, 58rem);
+  margin-left: clamp(1rem, 2vw, 1.8rem);
+  opacity: 1;
+}
+
+.link {
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition: color 0.2s ease;
+}
+.link:hover {
+  color: #fff;
+}
+
+.cta {
+  background: #fff;
+  color: #15181b;
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+@keyframes islandFloat {
+  0%,
+  100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(4px);
+  }
+}
+
+/* Touch / small screens: no hover, so keep it readable as a tappable pill that
+   reveals the links on focus; cap the expanded width to the viewport. */
+@media (max-width: 48rem) {
+  .wrap:hover .links,
+  .wrap:focus-within .links {
+    max-width: 80vw;
+    overflow-x: auto;
+  }
+}

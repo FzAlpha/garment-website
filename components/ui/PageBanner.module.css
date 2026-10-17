@@ -18,7 +18,7 @@
 .img {
   object-fit: cover;
   object-position: center;
-  filter: grayscale(1) contrast(1.04) brightness(0.72);
+  filter: contrast(1.04) brightness(0.82) saturate(1.05);
   z-index: -2;
 }
 

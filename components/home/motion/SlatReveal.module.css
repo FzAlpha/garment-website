@@ -27,7 +27,7 @@
   transform: scaleY(1);
   will-change: transform;
   /* Monochrome treatment keeps photos cohesive with the blue-grey UI. */
-  filter: grayscale(1) contrast(1.03) brightness(0.96);
+  filter: contrast(1.03) brightness(0.98) saturate(1.05);
 }
 
 /* Pre-hide only once JS motion is active, so reduced-motion / no-JS keep the

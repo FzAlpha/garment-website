@@ -43,9 +43,21 @@ export default function Hero() {
   return (
     <section className={styles.hero} data-fit="hero" ref={root}>
       <div className={styles.panel} data-hero-panel>
-        {/* Notched nav band inside the hero panel, as in the reference */}
+        {/* Notched nav band inside the hero panel; the centre is a notch
+            connected to the top. It scrolls away with the hero, after which the
+            floating island (IslandNav) takes over. */}
         <div className={styles.navWrap} data-hero-nav>
-          <span className={styles.navBand} aria-hidden="true" />
+          {/* One continuous bluish band (VEXO): shorter side shelves hold the
+              writings; the centre drops down into a wide tongue with smooth
+              shoulders, and the dark PROLINK notch hangs into that tongue. */}
+          <svg
+            className={styles.navBand}
+            viewBox="0 0 1000 100"
+            preserveAspectRatio="none"
+            aria-hidden="true"
+          >
+            <path d="M0 0 H1000 V78 H680 C650 78 650 100 600 100 H400 C350 100 350 78 320 78 H0 Z" />
+          </svg>
           <nav className={styles.navBar} aria-label="Primary">
             <div className={`${styles.navGroup} ${styles.navLeft}`}>
               {leftNav.map((n) => (
@@ -55,8 +67,8 @@ export default function Hero() {
               ))}
             </div>
 
-            <Link href="/" className={styles.logo}>
-              {brand.name}
+            <Link href="/" className={styles.logo} aria-label={`${brand.name} home`}>
+              <span className={styles.logoNotch}>{brand.name}</span>
             </Link>
 
             <div className={`${styles.navGroup} ${styles.navRight}`}>

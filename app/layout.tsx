@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, Lato, Anton } from "next/font/google";
 import { brand, colors } from "@/lib/tokens";
-import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/util/ScrollReveal";
 import "./globals.css";
@@ -73,7 +72,6 @@ export default function RootLayout({
         <a className="skip-link" href="#main">
           Skip to content
         </a>
-        <Header />
         <main id="main">{children}</main>
         <Footer />
         <ScrollReveal />

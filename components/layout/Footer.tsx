@@ -5,30 +5,24 @@ import { usePathname } from "next/navigation";
 import { company, mailtoLink, telLink, telLinkAlt, whatsappLink } from "@/lib/company";
 import styles from "./Footer.module.css";
 
-export default function Footer() {
+export default function Footer({ showOnHome = false }: { showOnHome?: boolean }) {
   const year = new Date().getFullYear();
   // The homepage uses the monochrome (VEXO) theme; match the footer to it there
   // while inner pages keep the locked maroon identity.
   const isHome = usePathname() === "/";
 
+  // On the homepage the global (layout) footer is covered by the full-screen
+  // deck; it's instead rendered as the deck's final slide with `showOnHome`.
+  if (isHome && !showOnHome) return null;
+
   return (
-    <footer className={`${styles.footer} ${isHome ? styles.mono : ""}`}>
+    <footer
+      className={`${styles.footer} ${isHome ? styles.mono : ""} ${
+        showOnHome ? styles.deckSlide : ""
+      }`}
+    >
       <div className={styles.inner}>
         <div className={styles.grid}>
-          <div className={styles.brandCol}>
-            <div className={styles.brandName}>{company.name}</div>
-            <div className={styles.brandSub}>{company.tagline}</div>
-            <p className={styles.blurb}>
-              Precision garment manufacturing and customized uniform solutions —
-              engineered in India, trusted by institutions and brands worldwide.
-            </p>
-            <ul className={styles.compliance}>
-              {company.compliance.map((c) => (
-                <li key={c}>{c}</li>
-              ))}
-            </ul>
-          </div>
-
           <nav aria-label="Solutions">
             <h2 className={styles.colTitle}>Solutions</h2>
             <div className={styles.links}>
