@@ -611,22 +611,26 @@ textarea:focus {
   opacity: 0;
 }
 
-/* Deck disengaged (mobile / reduced-motion / pre-mount): the per-section
+/* Deck disengaged WITHOUT motion (reduced-motion / pre-mount): the per-section
    entrance timelines never run, so reveal everything the gate pre-hid.
-   `.deck-engaged` is set before first paint on desktop, so no flash there. */
-.deck-root:not(.deck-engaged) [data-anim],
-.deck-root:not(.deck-engaged) [data-hero-word],
-.deck-root:not(.deck-engaged) [data-hero-float],
-.deck-root:not(.deck-engaged) [data-hero-nav],
-.deck-root:not(.deck-engaged) [data-hero-fig],
-.deck-root:not(.deck-engaged) [data-ghost],
-.deck-root:not(.deck-engaged) [data-split] [data-char] {
+   `.deck-engaged` is set before first paint on desktop, so no flash there.
+   `.deck-scroll` (mobile/tablet with motion) is excluded — there the entrance
+   timelines DO run, driven by a ScrollTrigger as each section scrolls in, so
+   the elements must stay pre-hidden until then. */
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-anim],
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-hero-word],
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-hero-float],
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-hero-nav],
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-hero-fig],
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-ghost],
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-split] [data-char] {
   opacity: 1;
 }
 /* SlatReveal strips are pre-hidden (scaleY 0) under .reveal-ready and scaled
-   back by the entrance timeline; restore them too when the deck is disengaged,
-   or the section photos never appear on mobile. */
-.deck-root:not(.deck-engaged) [data-strip] {
+   back by the entrance timeline; restore them too when the deck is disengaged
+   without motion, or the section photos never appear. In scroll mode the
+   timeline reveals them, so leave them pre-hidden there. */
+.deck-root:not(.deck-engaged):not(.deck-scroll) [data-strip] {
   transform: scaleY(1);
 }
 

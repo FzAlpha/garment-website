@@ -178,13 +178,18 @@ export default function Deck({
     };
   }, [engaged, count]);
 
-  // When the deck is disengaged (mobile / reduced-motion), sections live in
-  // normal flow: every one is "active" so its content shows, and `reduced` tells
-  // the entrance hooks to skip animating (CSS un-hides the pre-hidden bits).
-  const flow = reduced || !engaged;
+  // When the deck is disengaged, sections live in normal document flow and
+  // every one is "active" so its content shows. Two disengaged sub-modes:
+  //  • reduced-motion → entrance hooks skip entirely (CSS keeps content shown);
+  //  • scroll (mobile/tablet with motion) → each section's entrance timeline is
+  //    built and played by a ScrollTrigger as it scrolls into view.
+  const flow = !engaged;
+  const scroll = flow && !reduced;
 
   return (
-    <div className={`deck-root${engaged ? " deck-engaged" : ""}`}>
+    <div
+      className={`deck-root${engaged ? " deck-engaged" : ""}${scroll ? " deck-scroll" : ""}`}
+    >
       {slides.map((child, i) => (
         <div
           key={i}
@@ -198,7 +203,8 @@ export default function Deck({
               index: i,
               active: flow ? true : i === active,
               innerStep: i === active ? inner : 0,
-              reduced: flow,
+              reduced,
+              scroll,
             }}
           >
             {child}

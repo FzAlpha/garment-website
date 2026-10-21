@@ -11,6 +11,9 @@ export type SlideState = {
   innerStep: number;
   /** True when motion is disabled — the deck falls back to normal flow. */
   reduced: boolean;
+  /** True when the deck is disengaged but motion is allowed (mobile/tablet):
+   *  sections scroll natively and each entrance timeline plays on scroll-in. */
+  scroll: boolean;
 };
 
 export const SlideContext = createContext<SlideState>({
@@ -18,6 +21,7 @@ export const SlideContext = createContext<SlideState>({
   active: true,
   innerStep: 0,
   reduced: true,
+  scroll: false,
 });
 
 export const useSlide = () => useContext(SlideContext);
