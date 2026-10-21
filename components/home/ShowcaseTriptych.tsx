@@ -27,7 +27,7 @@ export default function ShowcaseTriptych() {
       <div className={styles.inner}>
         <div className={styles.triptych}>
           <div className={styles.triLeft}>
-            <SlatReveal img={bg(home.triptych[0], 700)} className={styles.photo} />
+            <SlatReveal img={'url("/images/showcase/walk.jpg")'} className={styles.photo} />
             <Reveal as="p" variant="rise" className={styles.copy}>
               Specification-accurate garments — cut, stitched and finished under
               one roof in India.
@@ -35,7 +35,7 @@ export default function ShowcaseTriptych() {
           </div>
 
           <div className={styles.triCenter}>
-            <SlatReveal img={bg(home.triptych[1], 800)} className={styles.photo} />
+            <SlatReveal img={'url("/images/showcase/street.jpg")'} className={styles.photo} />
           </div>
 
           <div className={styles.triRight}>

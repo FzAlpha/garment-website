@@ -32,7 +32,7 @@ export default function GearDuo() {
 
         <div className={styles.duo}>
           <Link href="/uniforms" className={styles.bigCard}>
-            <SlatReveal img={bg(home.duo[0], 800)} className={styles.cardMedia}>
+            <SlatReveal img={'url("/images/showcase/uniforms-card.jpg")'} className={styles.cardMedia}>
               <div className={styles.cardInner}>
                 <span className={styles.index}>01 / Uniforms</span>
                 <h3>Institutional &amp; Corporate Uniform Programs</h3>

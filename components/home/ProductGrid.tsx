@@ -37,6 +37,17 @@ const PRODUCTS = [
   { name: "Combed Cotton Tee", meta: "Premium Knit", href: "/products/premium-tshirts" },
 ];
 
+// Local image overrides for specific product cards (index → CSS url()).
+const productImageOverride: Record<number, string> = {
+  1: 'url("/images/showcase/security-guard.jpg")', // Security Guard Uniform
+  3: 'url("/images/showcase/corporate-polo.jpg")', // Corporate Polo Shirt
+  4: 'url("/images/showcase/school-uniform.jpg")', // School Uniform Set
+  5: 'url("/images/showcase/industrial-workwear.jpg")', // Industrial Workwear
+  6: 'url("/images/showcase/hospitality-apparel.jpg")', // Hospitality Apparel
+};
+const productImage = (i: number) =>
+  productImageOverride[i] ?? bg(home.products[i], 500);
+
 export default function ProductGrid() {
   const root = useRef<HTMLElement>(null);
   const row1 = [0, 1, 2, 3];
@@ -63,7 +74,7 @@ export default function ProductGrid() {
               <span
                 className={styles.media}
                 aria-hidden="true"
-                style={{ backgroundImage: bg(home.products[i], 500) }}
+                style={{ backgroundImage: productImage(i) }}
               />
               <Label name={PRODUCTS[i].name} meta={PRODUCTS[i].meta} />
             </Link>
@@ -73,7 +84,7 @@ export default function ProductGrid() {
               <span
                 className={styles.media}
                 aria-hidden="true"
-                style={{ backgroundImage: bg(home.products[i], 500) }}
+                style={{ backgroundImage: productImage(i) }}
               />
               <span className={styles.tag}>
                 <span className={styles.pill}>Bulk MOQ</span>

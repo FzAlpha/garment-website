@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Cormorant_Garamond, Lato, Anton } from "next/font/google";
+import { Cormorant_Garamond, Lato, Anton, Jost } from "next/font/google";
 import { brand, colors } from "@/lib/tokens";
 import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/util/ScrollReveal";
@@ -29,6 +29,14 @@ const anton = Anton({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-anton",
+  display: "swap",
+});
+
+// Geometric "linear" sans — used for the PROLINK wordmark / logotype.
+const jost = Jost({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-jost",
   display: "swap",
 });
 
@@ -64,7 +72,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${lato.variable} ${anton.variable}`}
+      className={`${cormorant.variable} ${lato.variable} ${anton.variable} ${jost.variable}`}
       suppressHydrationWarning
     >
       <body>

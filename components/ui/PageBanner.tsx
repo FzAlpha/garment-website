@@ -21,7 +21,7 @@ export default function PageBanner({
     <section className={styles.banner}>
       <div className={styles.panel}>
         <Image
-          src={img(image, 1600)}
+          src={image.startsWith("/") ? image : img(image, 1600)}
           alt=""
           fill
           priority

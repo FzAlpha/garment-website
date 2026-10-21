@@ -5,6 +5,7 @@
    hover / keyboard focus it expands horizontally to reveal the nav links. */
 
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { brand } from "@/lib/tokens";
 import ProlinkWordmark from "@/components/ui/ProlinkWordmark";
@@ -47,6 +48,13 @@ export default function IslandNav({ hidden = false }: { hidden?: boolean }) {
     >
       <div className={styles.island} tabIndex={0}>
         <Link href="/" className={styles.brand} aria-label={`${brand.name} home`}>
+          <Image
+            src="/images/prolink-emblem.png"
+            alt=""
+            width={17}
+            height={21}
+            className={styles.brandEmblem}
+          />
           <ProlinkWordmark height={20} />
         </Link>
         <nav ref={linksRef} className={styles.links} aria-label="Primary">

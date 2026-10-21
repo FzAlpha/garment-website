@@ -7,7 +7,6 @@ import Marquee from "./motion/Marquee";
 import Reveal from "./motion/Reveal";
 import { useEnter } from "./motion/deck/useEnter";
 import { addAnim } from "./motion/deck/enterHelpers";
-import { bg, home } from "@/lib/media";
 
 export default function PosterLevelUp() {
   const root = useRef<HTMLElement>(null);
@@ -29,7 +28,7 @@ export default function PosterLevelUp() {
           <span
             className={styles.posterImg}
             aria-hidden="true"
-            style={{ backgroundImage: bg(home.poster, 800) }}
+            style={{ backgroundImage: 'url("/images/showcase/dispatch.jpg")' }}
           />
           <div className={styles.meta}>
             <span className={styles.brandTag}>{brand.name}</span>

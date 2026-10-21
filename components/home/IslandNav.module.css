@@ -42,9 +42,18 @@
 .brand {
   display: inline-flex;
   align-items: center;
+  gap: 0.4rem;
   color: #fff;
   text-decoration: none;
   line-height: 1;
+}
+.brandEmblem {
+  width: auto;
+  /* Taller box than the visible art (PNG has transparent padding) so the mark
+     stays centred and never clips against the pill edges. */
+  height: 2rem;
+  object-fit: contain;
+  flex: none;
 }
 
 /* Collapsed by default (width 0, faded); expands on hover / focus. */

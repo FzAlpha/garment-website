@@ -56,6 +56,9 @@
 }
 .navLeft {
   justify-content: flex-start;
+  /* Positioning context for the mega-menu panels so they anchor to the nav's
+     left edge and always stay within the hero panel. */
+  position: relative;
 }
 .navRight {
   justify-content: flex-end;
@@ -72,6 +75,178 @@
 .navLink:hover {
   opacity: 0.6;
 }
+
+/* ── Garments mega-menu ────────────────────────────────────────────────────
+   Hover/focus on the "Garments" trigger reveals a multi-column card. The panel
+   is a child of .hasMega and the invisible padding-top on .megaWrap bridges the
+   gap below the nav band, so the menu stays open as the pointer travels from the
+   link into the card. */
+.hasMega {
+  display: inline-flex;
+  align-items: center;
+}
+.megaTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.34rem;
+}
+.megaCaret {
+  transition: transform 0.28s ease;
+}
+.hasMega:hover .megaCaret,
+.hasMega:focus-within .megaCaret {
+  transform: rotate(180deg);
+}
+.hasMega:hover .navLink,
+.hasMega:focus-within .navLink {
+  opacity: 1;
+}
+
+/* Positioned dropdown wrapper. padding-top is the hover bridge (transparent). */
+.megaWrap {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  padding-top: 0.9rem;
+  z-index: 30;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition:
+    opacity 0.26s ease,
+    transform 0.3s cubic-bezier(0.2, 0.7, 0.2, 1),
+    visibility 0s linear 0.3s;
+}
+.hasMega:hover .megaWrap,
+.hasMega:focus-within .megaWrap {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition-delay: 0s;
+}
+
+.megaPanel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 15rem;
+  gap: clamp(1.25rem, 2.2vw, 2rem);
+  width: min(52rem, 84vw);
+  padding: clamp(1.25rem, 2vw, 1.75rem);
+  background: #ffffff;
+  border: 1px solid rgba(20, 22, 24, 0.07);
+  border-radius: 1.1rem;
+  box-shadow:
+    0 2px 6px rgba(16, 24, 32, 0.05),
+    0 24px 50px -24px rgba(16, 24, 32, 0.35);
+}
+.megaCols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1rem, 1.8vw, 1.6rem);
+}
+.megaCol {
+  min-width: 0;
+}
+.megaHead {
+  display: block;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: #141618;
+  text-decoration: none;
+}
+.megaHead:hover {
+  color: var(--gold);
+}
+.megaBlurb {
+  margin: 0.2rem 0 0.55rem;
+  font-size: 0.72rem;
+  line-height: 1.4;
+  color: #6b747a;
+}
+.megaLinks {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.28rem;
+}
+.megaLink {
+  display: block;
+  font-size: 0.78rem;
+  line-height: 1.3;
+  color: #3b4248;
+  text-decoration: none;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+.megaLink:hover {
+  color: #141618;
+  transform: translateX(2px);
+}
+
+/* Column 3 — featured image / collection banner. */
+.megaFeature {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 12rem;
+  border-radius: 0.85rem;
+  overflow: hidden;
+  text-decoration: none;
+  isolation: isolate;
+}
+.megaFeatureImg {
+  object-fit: cover;
+  object-position: center;
+  z-index: -2;
+  transition: transform 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.megaFeature:hover .megaFeatureImg {
+  transform: scale(1.05);
+}
+.megaFeatureOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(14, 18, 20, 0) 30%,
+    rgba(14, 18, 20, 0.82) 100%
+  );
+}
+.megaFeatureText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding: 0.9rem 1rem 1rem;
+  color: #fff;
+}
+.megaFeatureKicker {
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.78);
+}
+.megaFeatureTitle {
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.15;
+}
+.megaFeatureCta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: 0.35rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: #fff;
+}
+.megaFeature:hover .megaFeatureCta svg {
+  transform: translateX(3px);
+}
+.megaFeatureCta svg {
+  transition: transform 0.25s ease;
+}
 /* Centre dock: holds the notch (link home) and the hover-reveal credentials
    card. align-self:start keeps the notch hanging from the band's top edge. */
 .logoDock {
@@ -81,7 +256,7 @@
   /* Reserve only the collapsed width so the expanding notch (absolutely
      positioned below) never widens this grid column — otherwise growth pushes
      the side nav links and overflows the row. */
-  width: var(--notch-w, 11rem);
+  width: var(--notch-w, 12rem);
   height: clamp(4.5rem, 7vw, 6rem);
   z-index: 8;
 }
@@ -109,10 +284,10 @@
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  width: var(--notch-w, 11rem);
+  width: var(--notch-w, 12rem);
   background: #15181b;
   color: #fff;
-  padding: 1rem 1.6rem 1.1rem;
+  padding: 1.15rem 1.6rem 1.15rem;
   border-radius: 0 0 clamp(1rem, 1.8vw, 1.4rem) clamp(1rem, 1.8vw, 1.4rem);
   overflow: hidden;
   box-shadow: 0 24px 54px -30px rgba(8, 11, 13, 0.7);
@@ -127,9 +302,18 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   color: #fff;
   text-decoration: none;
   line-height: 1;
+}
+.logoEmblem {
+  width: auto;
+  /* Box is taller than the visible art: the PNG carries transparent padding so
+     the emblem is optically centred and can never touch the notch edges. */
+  height: 2.4rem;
+  object-fit: contain;
+  flex: none;
 }
 /* Hover/focus: the tab itself expands into the wide rectangle. */
 .logoDock:hover .logoNotch,
@@ -145,7 +329,7 @@
 .logoDetails {
   width: 100%;
   display: grid;
-  grid-template-columns: 1.1fr 1fr 1.2fr;
+  grid-template-columns: 1fr 1.35fr 1.1fr;
   gap: clamp(1rem, 2.4vw, 2.1rem);
   text-align: left;
   max-height: 0;
@@ -158,7 +342,7 @@
 }
 .logoDock:hover .logoDetails,
 .logoDock:focus-within .logoDetails {
-  max-height: 24rem;
+  max-height: 32rem;
   margin-top: clamp(0.9rem, 1.8vw, 1.4rem);
   opacity: 1;
 }
@@ -203,9 +387,13 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 0.34rem;
-  font-size: 0.78rem;
-  line-height: 1.35;
+  grid-template-columns: 1fr 1fr;
+  grid-auto-flow: column;
+  grid-template-rows: repeat(7, auto);
+  column-gap: clamp(0.8rem, 1.6vw, 1.3rem);
+  row-gap: 0.32rem;
+  font-size: 0.75rem;
+  line-height: 1.3;
 }
 .cardServices li {
   position: relative;
@@ -348,11 +536,10 @@
   transform-origin: 50% 100%;
 }
 .figureImg {
-  object-fit: cover;
-  object-position: center 22%;
-  filter: contrast(1.03) saturate(1.05);
-  mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 100%);
-  -webkit-mask-image: linear-gradient(180deg, transparent 0%, #000 24%, #000 100%);
+  object-fit: contain;
+  object-position: center bottom;
+  filter: contrast(1.03) saturate(1.05)
+    drop-shadow(0 18px 34px rgba(20, 22, 24, 0.22));
 }
 
 .bottom {
@@ -373,15 +560,24 @@
   margin-bottom: 0.9rem;
 }
 .dots span {
+  position: relative;
   width: 2.2rem;
   height: 2.2rem;
   border-radius: 50%;
   border: 2px solid var(--panel-a);
-  background: linear-gradient(135deg, #93a0a3, #3f484b);
+  background: var(--panel-b, #1e2426);
   margin-left: -0.7rem;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 .dots span:first-child {
   margin-left: 0;
+}
+.dotImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .intro p {
   font-size: 0.9rem;

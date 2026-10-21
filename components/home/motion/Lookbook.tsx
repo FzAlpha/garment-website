@@ -12,9 +12,9 @@ import Marquee from "./Marquee";
 import styles from "./Lookbook.module.css";
 
 const OUTFITS = [
-  { tag: "Security & Protective Uniforms", meta: "Institutional Programs", img: home.lookbook[0] },
-  { tag: "Corporate & Executive Formalwear", meta: "Business Apparel", img: home.lookbook[1] },
-  { tag: "Healthcare & Hospitality Wear", meta: "Service Sectors", img: home.lookbook[2] },
+  { tag: "Security & Protective Uniforms", meta: "Institutional Programs", img: "/images/showcase/lb-security.jpg" },
+  { tag: "Corporate & Executive Formalwear", meta: "Business Apparel", img: "/images/showcase/lb-business.jpg" },
+  { tag: "Healthcare & Hospitality Wear", meta: "Service Sectors", img: "/images/showcase/lb-healthcare.jpg" },
   { tag: "Custom Knits & Textiles", meta: "Made To Specification", img: home.lookbook[3] },
 ];
 
@@ -52,7 +52,7 @@ export default function Lookbook() {
               key={i}
               className={styles.outfit}
               data-outfit={i}
-              style={{ backgroundImage: bg(o.img, 700) }}
+              style={{ backgroundImage: o.img.startsWith("/") ? `url("${o.img}")` : bg(o.img, 700) }}
             >
               <div className={styles.meta}>
                 <span className={styles.kicker}>{o.tag}</span>

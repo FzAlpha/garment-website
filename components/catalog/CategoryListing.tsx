@@ -7,7 +7,7 @@ import { banners } from "@/lib/media";
 const categoryBanner: Record<string, string> = {
   "premium-formal": banners.custom,
   "premium-tshirts": banners.garments,
-  "security-uniforms": banners.uniforms,
+  "security-uniforms": "/images/showcase/security-banner.jpg",
 };
 
 export default function CategoryListing({ category }: { category: CategorySlug }) {

@@ -6,6 +6,14 @@ import Icon from "@/components/ui/Icon";
 import { getSector, getAllSectorParams } from "@/data/uniforms";
 import styles from "./sector.module.css";
 
+// Per-sector banner overrides (local images). Sectors not listed fall back to
+// PageBanner's default banner.
+const sectorBanner: Record<string, string> = {
+  education: "/images/showcase/education-banner.jpg",
+  industrial: "/images/showcase/industrial-banner.jpg",
+  hospitality: "/images/showcase/hospitality-banner.jpg",
+};
+
 export function generateStaticParams() {
   return getAllSectorParams();
 }
@@ -39,6 +47,7 @@ export default async function SectorPage({
         eyebrow={s.eyebrow}
         title={`${s.label} Uniforms`}
         subtitle={s.summary}
+        image={sectorBanner[sector]}
         crumbs={[
           { label: "Home", href: "/" },
           { label: "Uniform Solutions", href: "/uniforms" },
