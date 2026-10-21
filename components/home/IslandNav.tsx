@@ -63,9 +63,6 @@ export default function IslandNav({ hidden = false }: { hidden?: boolean }) {
               {n.label}
             </Link>
           ))}
-          <Link href="/quote" className={styles.cta}>
-            Get a Quote
-          </Link>
         </nav>
       </div>
     </div>
