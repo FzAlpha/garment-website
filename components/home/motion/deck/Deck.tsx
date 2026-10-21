@@ -60,16 +60,45 @@ export default function Deck({
 
   // GSAP owns the slide transforms from the first frame (no CSS transform to
   // conflict with): active slide at 0, the rest stacked just below.
+  //
+  // The deck engages only on wide screens with motion allowed. On phones and
+  // tablets (or under reduced-motion) it disengages: sections render in normal
+  // document flow and scroll natively — the full-page deck is a desktop
+  // flourish, never a touch scroll-jack. The breakpoint is re-evaluated live so
+  // rotating a tablet or resizing a window switches modes cleanly.
   useIsoLayoutEffect(() => {
     if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setReduced(true);
-      return;
-    }
-    setEngaged(true);
-    slideEls.current.forEach((el, i) => {
-      if (el) gsap.set(el, { yPercent: i === 0 ? 0 : 100 });
-    });
+    const reduceMq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const wideMq = window.matchMedia("(min-width: 64rem)");
+
+    const apply = () => {
+      const reduce = reduceMq.matches;
+      const canEngage = !reduce && wideMq.matches;
+      setReduced(reduce);
+      setEngaged(canEngage);
+      if (canEngage) {
+        activeRef.current = 0;
+        innerRef.current = 0;
+        setActive(0);
+        setInner(0);
+        slideEls.current.forEach((el, i) => {
+          if (el) gsap.set(el, { yPercent: i === 0 ? 0 : 100 });
+        });
+      } else {
+        // Drop the GSAP transforms so every slide returns to normal flow.
+        slideEls.current.forEach((el) => {
+          if (el) gsap.set(el, { clearProps: "transform" });
+        });
+      }
+    };
+
+    apply();
+    reduceMq.addEventListener("change", apply);
+    wideMq.addEventListener("change", apply);
+    return () => {
+      reduceMq.removeEventListener("change", apply);
+      wideMq.removeEventListener("change", apply);
+    };
   }, []);
 
   useEffect(() => {
@@ -149,6 +178,11 @@ export default function Deck({
     };
   }, [engaged, count]);
 
+  // When the deck is disengaged (mobile / reduced-motion), sections live in
+  // normal flow: every one is "active" so its content shows, and `reduced` tells
+  // the entrance hooks to skip animating (CSS un-hides the pre-hidden bits).
+  const flow = reduced || !engaged;
+
   return (
     <div className={`deck-root${engaged ? " deck-engaged" : ""}`}>
       {slides.map((child, i) => (
@@ -162,9 +196,9 @@ export default function Deck({
           <SlideContext.Provider
             value={{
               index: i,
-              active: reduced ? true : i === active,
+              active: flow ? true : i === active,
               innerStep: i === active ? inner : 0,
-              reduced,
+              reduced: flow,
             }}
           >
             {child}

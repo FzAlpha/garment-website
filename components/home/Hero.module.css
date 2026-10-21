@@ -76,6 +76,22 @@
   opacity: 0.6;
 }
 
+/* ── Mobile hamburger + slide-out menu (hidden on desktop) ─────────────────── */
+.menuBtn {
+  display: none;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  margin-left: -0.4rem;
+  border: 0;
+  background: transparent;
+  color: #15181b;
+  cursor: pointer;
+}
+.mobileMenu {
+  display: none;
+}
+
 /* ── Garments mega-menu ────────────────────────────────────────────────────
    Hover/focus on the "Garments" trigger reveals a multi-column card. The panel
    is a child of .hasMega and the invisible padding-top on .megaWrap bridges the
@@ -623,55 +639,207 @@
   .navLeft {
     display: none;
   }
+  .menuBtn {
+    display: inline-grid;
+    color: #fff;
+  }
+  /* A single cohesive dark floating bar: [hamburger] [logo] [Get a Quote]. */
   .navBar {
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr auto;
+    gap: 0.5rem;
+    padding-inline: clamp(0.85rem, 3.5vw, 1.25rem);
+    color: #fff;
+  }
+  .navRight {
+    gap: 0.5rem;
+    justify-self: end;
+  }
+  /* Invert the quote pill so it reads on the dark bar; nudged down a touch to
+     sit centred against the logo. */
+  .signPill {
+    background: #fff;
+    color: #15181b;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.66rem;
+    letter-spacing: 0.05em;
+    margin-top: 0.3rem;
   }
   .logoDock {
-    justify-self: start;
+    justify-self: center;
     align-self: center;
-    /* Collapse the reserved footprint; the notch is a plain tab here. */
     width: auto;
     height: auto;
   }
-  /* No hover on touch — keep the notch in flow as a plain home tab, and hide
-     the credentials card. */
+  /* Flatten the desktop "notch" tab into a plain inline wordmark on the bar. */
   .logoNotch {
     position: static;
     transform: none;
+    background: transparent;
+    color: #fff;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    overflow: visible;
   }
   .logoDetails {
     display: none;
   }
-  .navRight {
-    justify-self: end;
-  }
-  /* On mobile the notch sits at the left, so skip the stepped shape and use a
-     plain full-width bar behind the condensed nav. */
+  /* The dark floating nav bar itself. */
   .navBand {
     display: none;
   }
   .navWrap {
-    background: #f1f5f6;
-    box-shadow: 0 4px 9px rgba(22, 32, 40, 0.11);
+    height: clamp(3.4rem, 13vw, 4.25rem);
+    background: #15181b;
+    border-radius: clamp(0.9rem, 3vw, 1.25rem);
+    box-shadow: 0 16px 34px -20px rgba(8, 11, 13, 0.7);
   }
   .navRight .navLink {
     display: none;
   }
-}
-@media (max-width: 46rem) {
-  .figure {
-    width: 72vw;
-    height: 54%;
-    opacity: 0.9;
+
+  /* Deck is disengaged below 64rem → the hero scrolls natively, rebuilt as a
+     purpose-made mobile layout: centred headline → full-width CTAs → the model
+     framed in a rounded studio card → a centred trust row. */
+  .panel {
+    min-height: 0;
+    padding: clamp(5.5rem, 17vw, 7rem) clamp(1.1rem, 5vw, 2rem)
+      clamp(1.75rem, 6vw, 2.5rem);
   }
-  .bottom {
+  .title {
+    max-width: 16ch;
+  }
+  /* Stacked, full-width buttons = comfortable tap targets. */
+  .actions {
     flex-direction: column;
     align-items: stretch;
-    padding-top: clamp(10rem, 60vw, 18rem);
+    gap: 0.65rem;
+    margin-top: clamp(1.1rem, 4vw, 1.6rem);
   }
+  .actions :global(.btn) {
+    width: 100%;
+    text-align: center;
+  }
+  /* The model, set in a framed light "studio" card so the cut-out reads as an
+     intentional portrait rather than floating on the bare panel. */
+  .figure {
+    position: relative;
+    left: auto;
+    right: auto;
+    width: 100%;
+    height: clamp(19rem, 72vw, 27rem);
+    margin: clamp(1.5rem, 5vw, 2.25rem) 0 0;
+    border-radius: clamp(1.25rem, 4vw, 1.75rem);
+    overflow: hidden;
+    background: radial-gradient(
+      135% 85% at 50% 4%,
+      #f5f8f9 0%,
+      #dde8ea 52%,
+      #c6d4d6 100%
+    );
+    box-shadow:
+      0 30px 60px -45px rgba(10, 14, 16, 0.55),
+      inset 0 0 0 1px rgba(20, 22, 24, 0.05);
+    opacity: 1;
+  }
+  .figureImg {
+    object-position: 44% bottom;
+  }
+  /* Supporting row: avatars + one-line positioning copy, centred under the card.
+     The secondary rack photo is dropped on mobile to keep the hero focused. */
+  .bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: clamp(1.5rem, 5vw, 2.25rem);
+  }
+  .dots {
+    justify-content: center;
+  }
+  .videoCard {
+    display: none;
+  }
+  .intro {
+    max-width: 34ch;
+  }
+}
+@media (max-width: 46rem) {
   .videoCard {
     width: 100%;
     aspect-ratio: 16 / 9;
+  }
+}
+
+/* ── Mobile slide-out menu ──────────────────────────────────────────────────
+   Full-screen dark panel; slides in from the left. Hidden/inert when closed. */
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #15181b;
+  color: #fff;
+  padding: clamp(1rem, 4vw, 1.75rem);
+  flex-direction: column;
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+  visibility: hidden;
+}
+.mobileMenuOpen {
+  transform: translateX(0);
+  visibility: visible;
+}
+.mobileMenuBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.menuClose {
+  display: grid;
+  place-items: center;
+  width: 2.8rem;
+  height: 2.8rem;
+  margin-right: -0.5rem;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+.mobileMenuNav {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  margin-top: clamp(1.5rem, 6vw, 3rem);
+}
+.mobileMenuNav a {
+  font-family: var(--display);
+  text-transform: uppercase;
+  font-size: clamp(1.9rem, 9vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: 0.01em;
+  color: #fff;
+  text-decoration: none;
+  padding: 0.35rem 0;
+}
+.mobileMenuNav a:active {
+  opacity: 0.6;
+}
+.mobileMenuCta {
+  margin-top: 1.25rem;
+  align-self: flex-start;
+  background: #fff;
+  color: #15181b !important;
+  border-radius: 999px;
+  padding: 0.85rem 1.75rem !important;
+  font-family: var(--sans) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+/* The overlay only exists for touch/narrow layouts. */
+@media (max-width: 60rem) {
+  .mobileMenu {
+    display: flex;
   }
 }
 

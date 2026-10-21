@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { brand } from "@/lib/tokens";
@@ -175,6 +175,10 @@ const rightNav = [
   { label: "Contact", href: "/contact" },
 ];
 
+// Flattened nav for the mobile slide-out menu (the mega-menus collapse to their
+// top-level links on touch, where there is no hover to reveal them).
+const mobileNav = [...leftNav, ...rightNav];
+
 // Shown inside the notch's hover card (the business-card credentials panel).
 const cardServices = [
   "Customized garment manufacturing",
@@ -201,6 +205,17 @@ const titleLines: { text: string; em?: boolean }[][] = [
 
 export default function Hero() {
   const root = useRef<HTMLElement>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  // Lock body scroll while the mobile menu overlay is open.
+  useEffect(() => {
+    if (!menuOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [menuOpen]);
 
   useEnter(root, (tl, r) => {
     const q = (s: string) => r.querySelectorAll(s);
@@ -252,6 +267,20 @@ export default function Hero() {
             <path d="M0 0 H1000 V78 H680 C650 78 650 100 600 100 H400 C350 100 350 78 320 78 H0 Z" />
           </svg>
           <nav className={styles.navBar} aria-label="Primary">
+            {/* Mobile-only hamburger — opens the slide-out menu. The desktop
+                nav uses the hover mega-menus instead (button hidden ≥60rem). */}
+            <button
+              type="button"
+              className={styles.menuBtn}
+              aria-label="Open menu"
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen(true)}
+            >
+              <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+                <path d="M3 6h18M3 12h18M3 18h18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
+
             <div className={`${styles.navGroup} ${styles.navLeft}`}>
               {leftNav.map((n) =>
                 megaMenus[n.label] ? (
@@ -424,6 +453,48 @@ export default function Hero() {
             />
           </Link>
         </div>
+      </div>
+
+      {/* Mobile slide-out menu (touch nav for the homepage). */}
+      <div
+        className={`${styles.mobileMenu} ${menuOpen ? styles.mobileMenuOpen : ""}`}
+        role="dialog"
+        aria-modal="true"
+        aria-label="Site menu"
+        aria-hidden={!menuOpen}
+      >
+        <div className={styles.mobileMenuBar}>
+          <Link href="/" className={styles.logoBrand} onClick={() => setMenuOpen(false)}>
+            <Image
+              src="/images/prolink-emblem.png"
+              alt=""
+              width={22}
+              height={28}
+              className={styles.logoEmblem}
+            />
+            <ProlinkWordmark height={24} />
+          </Link>
+          <button
+            type="button"
+            className={styles.menuClose}
+            aria-label="Close menu"
+            onClick={() => setMenuOpen(false)}
+          >
+            <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true">
+              <path d="M6 6l12 12M18 6L6 18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <nav className={styles.mobileMenuNav} aria-label="Primary">
+          {mobileNav.map((n) => (
+            <Link key={n.href} href={n.href} onClick={() => setMenuOpen(false)}>
+              {n.label}
+            </Link>
+          ))}
+          <Link href="/quote" className={styles.mobileMenuCta} onClick={() => setMenuOpen(false)}>
+            Request a Quote
+          </Link>
+        </nav>
       </div>
     </section>
   );

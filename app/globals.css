@@ -611,6 +611,19 @@ textarea:focus {
   opacity: 0;
 }
 
+/* Deck disengaged (mobile / reduced-motion / pre-mount): the per-section
+   entrance timelines never run, so reveal everything the gate pre-hid.
+   `.deck-engaged` is set before first paint on desktop, so no flash there. */
+.deck-root:not(.deck-engaged) [data-anim],
+.deck-root:not(.deck-engaged) [data-hero-word],
+.deck-root:not(.deck-engaged) [data-hero-float],
+.deck-root:not(.deck-engaged) [data-hero-nav],
+.deck-root:not(.deck-engaged) [data-hero-fig],
+.deck-root:not(.deck-engaged) [data-ghost],
+.deck-root:not(.deck-engaged) [data-split] [data-char] {
+  opacity: 1;
+}
+
 /* Split-heading spans: words stay intact, characters animate individually. */
 [data-split] {
   display: block;
