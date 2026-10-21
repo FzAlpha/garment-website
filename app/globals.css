@@ -623,6 +623,12 @@ textarea:focus {
 .deck-root:not(.deck-engaged) [data-split] [data-char] {
   opacity: 1;
 }
+/* SlatReveal strips are pre-hidden (scaleY 0) under .reveal-ready and scaled
+   back by the entrance timeline; restore them too when the deck is disengaged,
+   or the section photos never appear on mobile. */
+.deck-root:not(.deck-engaged) [data-strip] {
+  transform: scaleY(1);
+}
 
 /* Split-heading spans: words stay intact, characters animate individually. */
 [data-split] {
