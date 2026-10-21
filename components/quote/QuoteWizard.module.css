@@ -4,14 +4,6 @@
   gap: clamp(1.5rem, 4vw, 3rem);
   align-items: start;
 }
-@media (max-width: 56rem) {
-  .wrap {
-    grid-template-columns: 1fr;
-  }
-  .rail {
-    position: static;
-  }
-}
 
 /* Stepper rail */
 .rail {
@@ -19,6 +11,19 @@
   top: calc(var(--header-h) + 1.5rem);
   display: grid;
   gap: 0.4rem;
+}
+
+/* Single-column stack on small screens. This block must come AFTER the base
+   .rail rule above: both have equal specificity, so source order decides, and
+   leaving `position: static` higher up let the later sticky rule override it —
+   the rail then floated over the form as the page scrolled. */
+@media (max-width: 56rem) {
+  .wrap {
+    grid-template-columns: 1fr;
+  }
+  .rail {
+    position: static;
+  }
 }
 .railItem {
   display: flex;
