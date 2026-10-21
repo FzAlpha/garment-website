@@ -68,7 +68,7 @@ export default function Footer({ showOnHome = false }: { showOnHome?: boolean })
             </div>
           </nav>
 
-          <div>
+          <div className={styles.contactCol}>
             <h2 className={styles.colTitle}>Get in Touch</h2>
             <address className={styles.contact}>
               <span>{company.address.line1}</span>

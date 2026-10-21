@@ -107,9 +107,58 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
-@media (max-width: 420px) {
+
+/* ── Mobile footer ──────────────────────────────────────────────────────────
+   Below 40rem the single long column read like one running paragraph. Lay the
+   nav lists out as a tidy 2-up grid with ruled headers, and give "Get in Touch"
+   its own full-width block, divided off and with contact details spaced out. */
+@media (max-width: 40rem) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.9rem 1.4rem;
+  }
+  .colTitle {
+    font-size: 0.8rem;
+    margin-bottom: 0.85rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.13);
+  }
+  .links {
+    gap: 0.65rem;
+  }
+  .links a {
+    font-size: 0.92rem;
+  }
+  /* Full-width contact block, set off from the link grid above. */
+  .contactCol {
+    grid-column: 1 / -1;
+    margin-top: 0.4rem;
+    padding-top: 1.6rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.13);
+  }
+  .contactCol .colTitle {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .contact {
+    gap: 0.7rem;
+  }
+  /* Dim the address lines so the tappable phone/email/WhatsApp links read as the
+     actionable items. */
+  .contact span {
+    color: rgba(238, 241, 241, 0.5);
+  }
+  .contact a {
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--ivory);
+  }
+  .bottom {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0.5rem;
+    margin-top: 1.9rem;
   }
 }
 
